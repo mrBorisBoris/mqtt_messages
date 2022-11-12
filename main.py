@@ -1,6 +1,17 @@
 import ssl
 
 import paho.mqtt.client as mqtt
+import time
+
+
+def connection():
+    try:
+        client.connect("93.188.43.181", 8883)
+    except OSError:
+        print('Ошибка соединения!')
+        time.sleep(1)
+        connection()
+
 
 
 def on_connect(client, userdata, flags, rc):
@@ -20,5 +31,6 @@ client.on_message = on_message
 
 client.username_pw_set(username="client1", password="aineekeechohdoo7haecah3r")
 print("Connecting...")
+connection()
 client.connect("93.188.43.181", 8883)
 client.loop_forever()
