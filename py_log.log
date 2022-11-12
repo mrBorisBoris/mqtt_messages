@@ -1,0 +1,10 @@
+2022-11-12 19:38:28,673 ERROR OSError: [Errno 51] Network is unreachable
+NoneType: None
+2022-11-12 19:38:28,673 ERROR --- Logging error ---
+NoneType: None
+2022-11-12 19:38:32,917 INFO Incotex/LPWAN/FromMeters/47141676/Event/MeterState
+2022-11-12 19:38:32,918 INFO b'{"commandParams":{"MeterParams":{"MeterType":6,"SerialNumber":"47141676"},"CommandHeader":{"DateTime":"2022-11-12T19:37:15","Command":1,"ErrorCode":0}},"meterState":{"State":0,"CurrentTariff":1,"LastConfig":"0001-01-01T00:00:00","TimeSyncType":0,"LastSyncTime":"0001-01-01T00:00:00"}}'
+2022-11-12 19:38:51,616 INFO Incotex/LPWAN/FromMeters/46158652/Event/MeterState
+2022-11-12 19:38:51,617 INFO b'{"commandParams":{"MeterParams":{"MeterType":9,"SerialNumber":"46158652"},"CommandHeader":{"DateTime":"2022-11-12T19:38:00","Command":1,"ErrorCode":0}},"meterState":{"State":0,"CurrentTariff":1,"LastConfig":"0001-01-01T00:00:00","TimeSyncType":0,"LastSyncTime":"0001-01-01T00:00:00"}}'
+2022-11-12 19:39:47,776 INFO Incotex/LPWAN/FromMeters/47248524/Event/MeterState
+2022-11-12 19:39:47,778 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248524"},"CommandHeader":{"DateTime":"2022-11-12T19:37:43","Command":1,"ErrorCode":0}},"meterState":{"State":0,"CurrentTariff":1,"LastConfig":"1970-01-01T03:05:03","TimeSyncType":0,"LastSyncTime":"0001-01-01T00:00:00"}}'

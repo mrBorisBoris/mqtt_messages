@@ -4,6 +4,14 @@ import paho.mqtt.client as mqtt
 import time
 import logging
 
+logging.basicConfig(level=logging.INFO,
+                    filename="py_log.log",
+                    filemode="w",
+                    format="%(asctime)s %(levelname)s %(message)s")
+
+logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
+logging.error('--- Logging error ---', exc_info=True)
+
 
 def connection():
     try:
@@ -21,6 +29,8 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(msg.topic, msg.payload)
+    logging.info(msg.topic)
+    logging.info(msg.payload)
 
 
 client = mqtt.Client(client_id="client1", clean_session=True, userdata=None, protocol=mqtt.MQTTv311, transport="tcp")
