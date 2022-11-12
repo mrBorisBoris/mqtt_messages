@@ -1,7 +1,8 @@
-import ssl
-
+import configparser
+import os
 import paho.mqtt.client as mqtt
 import time
+import logging
 
 
 def connection():
@@ -11,7 +12,6 @@ def connection():
         print('Ошибка соединения!')
         time.sleep(1)
         connection()
-
 
 
 def on_connect(client, userdata, flags, rc):
