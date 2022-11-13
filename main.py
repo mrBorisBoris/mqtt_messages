@@ -3,8 +3,8 @@ import os
 import paho.mqtt.client as mqtt
 import time
 import logging
-import postgre
-from postgre import error
+import psycopg2
+from psycopg2 import Error
 import collections
 
 
