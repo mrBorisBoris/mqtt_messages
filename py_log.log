@@ -1,8 +1,8 @@
-2022-11-14 20:56:49,681 ERROR OSError: [Errno 51] Network is unreachable
+2022-11-14 21:09:17,384 ERROR OSError: [Errno 51] Network is unreachable
 NoneType: None
-2022-11-14 20:56:49,681 ERROR --- Logging error ---
+2022-11-14 21:09:17,384 ERROR --- Logging error ---
 NoneType: None
-2022-11-14 20:57:01,046 INFO Incotex/LPWAN/FromMeters/47248529/Event/Archive
-2022-11-14 20:57:01,046 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248529"},"CommandHeader":{"DateTime":"2022-11-14T20:53:47","Command":3,"ErrorCode":0}},"archiveNumber":3,"archiveValues":[{"Time":"2022-11-14T20:00:00","ValueType":73,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":73,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:00:00","ValueType":74,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":74,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:00:00","ValueType":75,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":75,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:00:00","ValueType":76,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":76,"Quality":0,"Values":[0.0]}]}'
-2022-11-14 20:57:16,070 INFO Incotex/LPWAN/FromMeters/47248491/Event/Events
-2022-11-14 20:57:16,070 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248491"},"CommandHeader":{"DateTime":"2022-11-14T20:54:54","Command":5,"ErrorCode":0}},"eventsParams":{"EventCause":2,"LastTransferTime":"2022-11-14T20:53:40","Events":[{"EventInfo":{"JournalType":10,"EventCode":20,"EventType":20},"Time":"2022-11-14T20:53:41"}]}}'
+2022-11-14 21:09:41,037 INFO Incotex/LPWAN/FromMeters/47248491/Event/Events
+2022-11-14 21:09:41,037 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248491"},"CommandHeader":{"DateTime":"2022-11-14T21:07:21","Command":5,"ErrorCode":0}},"eventsParams":{"EventCause":2,"LastTransferTime":"2022-11-14T21:02:34","Events":[{"EventInfo":{"JournalType":10,"EventCode":21,"EventType":21},"Time":"2022-11-14T21:07:11"}]}}'
+2022-11-14 21:09:41,081 INFO Запись успешно добавлена \u200b\u200bв таблицy
+2022-11-14 21:09:41,081 INFO Соединение с PostgreSQL закрыто
