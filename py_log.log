@@ -1,10 +1,8 @@
-2022-11-12 19:38:28,673 ERROR OSError: [Errno 51] Network is unreachable
+2022-11-14 20:56:49,681 ERROR OSError: [Errno 51] Network is unreachable
 NoneType: None
-2022-11-12 19:38:28,673 ERROR --- Logging error ---
+2022-11-14 20:56:49,681 ERROR --- Logging error ---
 NoneType: None
-2022-11-12 19:38:32,917 INFO Incotex/LPWAN/FromMeters/47141676/Event/MeterState
-2022-11-12 19:38:32,918 INFO b'{"commandParams":{"MeterParams":{"MeterType":6,"SerialNumber":"47141676"},"CommandHeader":{"DateTime":"2022-11-12T19:37:15","Command":1,"ErrorCode":0}},"meterState":{"State":0,"CurrentTariff":1,"LastConfig":"0001-01-01T00:00:00","TimeSyncType":0,"LastSyncTime":"0001-01-01T00:00:00"}}'
-2022-11-12 19:38:51,616 INFO Incotex/LPWAN/FromMeters/46158652/Event/MeterState
-2022-11-12 19:38:51,617 INFO b'{"commandParams":{"MeterParams":{"MeterType":9,"SerialNumber":"46158652"},"CommandHeader":{"DateTime":"2022-11-12T19:38:00","Command":1,"ErrorCode":0}},"meterState":{"State":0,"CurrentTariff":1,"LastConfig":"0001-01-01T00:00:00","TimeSyncType":0,"LastSyncTime":"0001-01-01T00:00:00"}}'
-2022-11-12 19:39:47,776 INFO Incotex/LPWAN/FromMeters/47248524/Event/MeterState
-2022-11-12 19:39:47,778 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248524"},"CommandHeader":{"DateTime":"2022-11-12T19:37:43","Command":1,"ErrorCode":0}},"meterState":{"State":0,"CurrentTariff":1,"LastConfig":"1970-01-01T03:05:03","TimeSyncType":0,"LastSyncTime":"0001-01-01T00:00:00"}}'
+2022-11-14 20:57:01,046 INFO Incotex/LPWAN/FromMeters/47248529/Event/Archive
+2022-11-14 20:57:01,046 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248529"},"CommandHeader":{"DateTime":"2022-11-14T20:53:47","Command":3,"ErrorCode":0}},"archiveNumber":3,"archiveValues":[{"Time":"2022-11-14T20:00:00","ValueType":73,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":73,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:00:00","ValueType":74,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":74,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:00:00","ValueType":75,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":75,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:00:00","ValueType":76,"Quality":0,"Values":[0.0]},{"Time":"2022-11-14T20:30:00","ValueType":76,"Quality":0,"Values":[0.0]}]}'
+2022-11-14 20:57:16,070 INFO Incotex/LPWAN/FromMeters/47248491/Event/Events
+2022-11-14 20:57:16,070 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248491"},"CommandHeader":{"DateTime":"2022-11-14T20:54:54","Command":5,"ErrorCode":0}},"eventsParams":{"EventCause":2,"LastTransferTime":"2022-11-14T20:53:40","Events":[{"EventInfo":{"JournalType":10,"EventCode":20,"EventType":20},"Time":"2022-11-14T20:53:41"}]}}'

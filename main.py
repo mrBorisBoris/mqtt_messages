@@ -6,6 +6,7 @@ import logging
 import psycopg2
 from psycopg2 import Error
 import collections
+import postgre
 
 
 
@@ -38,7 +39,9 @@ def on_message(client, userdata, msg):
     logging.info(msg.topic)
     logging.info(msg.payload)
     queue_to.append(msg.payload)
-    data = str(queue_to.popleft())
+    data = msg.payload
+    postgre.postgre_code(str(data))
+    queue_to.popleft()
     print(data)
 
 
@@ -46,8 +49,10 @@ queue_to = collections.deque()
 
 
 client = mqtt.Client(client_id="client1", clean_session=True, userdata=None, protocol=mqtt.MQTTv311, transport="tcp")
+
 client.on_connect = on_connect
 client.on_message = on_message
+
 
 
 client.username_pw_set(username="client1", password="aineekeechohdoo7haecah3r")
