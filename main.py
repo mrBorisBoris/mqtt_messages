@@ -5,6 +5,7 @@ import time
 import paho.mqtt.client as mqtt
 import logging
 import codecs
+import config
 
 
 logging.basicConfig(level=logging.INFO,
@@ -31,7 +32,7 @@ def postgre_code(record):
                                            VALUES (%s,%s)"""
         # LPWAN = 'Incotex/TEST'
         record_to_insert = ('Incotex/TEST', str(record))
-        print(record_to_insert)
+
         cursor.execute(postgres_insert_query, record_to_insert)
 
         connection.commit()
@@ -76,13 +77,13 @@ def on_message(client, userdata, msg):
     logging.info(msg.payload)
     queue_to.append(msg.payload)
     data = str(msg.payload, 'UTF-8')
-    print(type(data))
-    print(data)
+    # print(type(data))
+    # print(data)
     record_to = str(data)
     queue_to.popleft()
 
-    print(data)
-    print(type(data))
+    # print(data)
+    # print(type(data))
     postgre_code(str(record_to))
 
 

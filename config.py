@@ -32,8 +32,8 @@ config['other']['ini_name'] = 'config.ini'
 # print(config['other']['ini_path'])
 with open('config.ini', 'w') as configfile:
     config.write(configfile)
-print(config.sections())
-print(os.path.abspath('mqtt_messages/config.ini'))
+# print(config.sections())
+# print(os.path.abspath('mqtt_messages/config.ini'))
 
 # file_name = os.path.abspath('mqtt_messages/config.ini')
 other = Other(os.path.abspath('mqtt_messages/config.ini'), 'config.ini')

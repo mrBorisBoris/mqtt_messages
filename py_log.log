@@ -1,8 +1,4 @@
-2022-11-14 21:09:17,384 ERROR OSError: [Errno 51] Network is unreachable
+2022-11-14 21:14:28,784 ERROR OSError: [Errno 51] Network is unreachable
 NoneType: None
-2022-11-14 21:09:17,384 ERROR --- Logging error ---
+2022-11-14 21:14:28,785 ERROR --- Logging error ---
 NoneType: None
-2022-11-14 21:09:41,037 INFO Incotex/LPWAN/FromMeters/47248491/Event/Events
-2022-11-14 21:09:41,037 INFO b'{"commandParams":{"MeterParams":{"MeterType":11,"SerialNumber":"47248491"},"CommandHeader":{"DateTime":"2022-11-14T21:07:21","Command":5,"ErrorCode":0}},"eventsParams":{"EventCause":2,"LastTransferTime":"2022-11-14T21:02:34","Events":[{"EventInfo":{"JournalType":10,"EventCode":21,"EventType":21},"Time":"2022-11-14T21:07:11"}]}}'
-2022-11-14 21:09:41,081 INFO Запись успешно добавлена \u200b\u200bв таблицy
-2022-11-14 21:09:41,081 INFO Соединение с PostgreSQL закрыто
