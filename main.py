@@ -8,6 +8,13 @@ import codecs
 import config
 
 
+class  Data_MQTT():
+    """Общий класс входящей информации"""
+    def __init__(self, topic, payload):
+        self.topic = topic
+        self.payload = str(payload, 'UTF-8')
+
+
 logging.basicConfig(level=logging.INFO,
                     filename="py_log.log",
                     filemode="w",
@@ -73,13 +80,16 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(msg.topic, msg.payload)
+    data_mqtt = Data_MQTT(msg.topic, msg.payload)
+
     logging.info(msg.topic)
     logging.info(msg.payload)
     queue_to.append(msg.payload)
     data = str(msg.payload, 'UTF-8')
+
     # print(type(data))
     # print(data)
-    record_to = str(data)
+    record_to = data_mqtt.payload
     queue_to.popleft()
 
     # print(data)
