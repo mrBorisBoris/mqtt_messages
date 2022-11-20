@@ -45,8 +45,8 @@ def on_message(client, userdata, msg):
     print(msg.topic, msg.payload)
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
 
-    logging.info(msg.topic)
-    logging.info(msg.payload)
+    # logging.info(msg.topic)
+    # logging.info(msg.payload)
     queue_to.append(msg.payload)
     record_to = data_mqtt.payload
     queue_to.popleft()

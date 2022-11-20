@@ -1,12 +1,16 @@
-2022-11-20 17:20:31,126 ERROR OSError: [Errno 51] Network is unreachable
+2022-11-20 17:30:58,243 ERROR OSError: [Errno 51] Network is unreachable
 NoneType: None
-2022-11-20 17:20:31,126 ERROR --- Logging error ---
+2022-11-20 17:30:58,244 ERROR --- Logging error ---
 NoneType: None
-2022-11-20 17:20:31,133 ERROR OSError: [Errno 51] Network is unreachable
+2022-11-20 17:30:58,249 ERROR OSError: [Errno 51] Network is unreachable
 NoneType: None
-2022-11-20 17:20:31,133 ERROR --- Logging error ---
+2022-11-20 17:30:58,249 ERROR --- Logging error ---
 NoneType: None
-2022-11-20 17:20:32,420 INFO Incotex/LPWAN/FromMeters/00704B4F/Event/MeterState
-2022-11-20 17:20:32,420 INFO b'{"commandParams":{"MeterParams":{"MeterType":0,"SerialNumber":"00704B4F"},"CommandHeader":{"DateTime":"0001-01-01T00:00:00","Command":1,"ErrorCode":12}},"meterState":{"State":0,"CurrentTariff":0,"LastConfig":"0001-01-01T00:00:00","TimeSyncType":0,"LastSyncTime":"0001-01-01T00:00:00"}}'
-2022-11-20 17:20:32,450 INFO Запись успешно добавлена \u200b\u200bв таблицy
-2022-11-20 17:20:32,451 INFO Соединение с PostgreSQL закрыто
+2022-11-20 17:31:02,296 INFO Запись успешно добавлена \u200b\u200bв таблицy
+2022-11-20 17:31:02,296 INFO Соединение с PostgreSQL закрыто
+2022-11-20 17:31:22,468 INFO Запись успешно добавлена \u200b\u200bв таблицy
+2022-11-20 17:31:22,468 INFO Соединение с PostgreSQL закрыто
+2022-11-20 17:31:26,414 INFO Запись успешно добавлена \u200b\u200bв таблицy
+2022-11-20 17:31:26,414 INFO Соединение с PostgreSQL закрыто
+2022-11-20 17:31:28,378 INFO Запись успешно добавлена \u200b\u200bв таблицy
+2022-11-20 17:31:28,378 INFO Соединение с PostgreSQL закрыто
