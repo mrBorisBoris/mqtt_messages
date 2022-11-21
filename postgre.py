@@ -1,17 +1,8 @@
 import psycopg2
 from psycopg2 import Error
 import config
-import logging
+import logger_file
 import codecs
-
-
-logging.basicConfig(level=logging.INFO,
-                    filename="py_log.log",
-                    filemode="w",
-                    format="%(asctime)s %(levelname)s %(message)s")
-
-logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
-logging.error('--- Logging error ---', exc_info=True)
 
 
 
@@ -36,11 +27,12 @@ def postgre_code(record, topic):
         connection.commit()
         count = cursor.rowcount
         print(count, "Запись успешно добавлена ​​в таблицy")
-        logging.info('Запись успешно добавлена ​​в таблицy')
+        logger_file.logging.info('Запись успешно добавлена ​​в таблицy')
+
 
     except (Exception, Error) as error:
         print("Ошибка при работе с PostgreSQL", error)
-        logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
+        logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
 
         postgre_code(record)
     finally:
@@ -48,7 +40,7 @@ def postgre_code(record, topic):
             cursor.close()
             connection.close()
             print("Соединение с PostgreSQL закрыто")
-            logging.info('Соединение с PostgreSQL закрыто')
+            logger_file.logging.info('Соединение с PostgreSQL закрыто')
 
 
 

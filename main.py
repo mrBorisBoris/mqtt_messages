@@ -3,7 +3,7 @@ from psycopg2 import Error
 import collections
 import time
 import paho.mqtt.client as mqtt
-import logging
+import logger_file
 import postgre
 import codecs
 import config
@@ -26,13 +26,15 @@ class  Data_MQTT():
             self.topic = 'LPWAN/Instants'
 
 
-logging.basicConfig(level=logging.INFO,
-                    filename="py_log.log",
-                    filemode="w",
-                    format="%(asctime)s %(levelname)s %(message)s")
+# logging.basicConfig(level=logging.INFO,
+#                    filename="py_log.log",
+#                    filemode="w",
+#                    format="%(asctime)s %(levelname)s %(message)s")
 
-logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
-logging.error('--- Logging error ---', exc_info=True)
+# logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
+# logging.error('--- Logging error ---', exc_info=True)
+logger_file.logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
+logger_file.logging.error('--- Logging error ---', exc_info=True)
 
 
 
@@ -55,8 +57,8 @@ def on_message(client, userdata, msg):
     print(msg.topic, msg.payload)
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
 
-    # logging.info(msg.topic)
-    # logging.info(msg.payload)
+    logger_file.logging.info(msg.topic)
+    logger_file.logging.info(msg.payload)
     queue_to.append(msg.payload)
     topic_to_record = data_mqtt.topic
     # print(data_mqtt.topic)
