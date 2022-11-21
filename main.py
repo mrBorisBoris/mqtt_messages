@@ -14,16 +14,17 @@ class  Data_MQTT():
     def __init__(self, topic, payload):
         self.topic = str(topic)
         self.payload = str(payload, 'UTF-8')
-        if 'Events' in topic:
-            self.topic = 'LPWAN/Events'
-        if 'MeterState' in topic:
-            self.topic = 'LPWAN/MeterState'
-        if 'Archive' in topic:
-            self.topic = 'LPWAN/Archive'
-        if 'MeterPassport' in topic:
-            self.topic = 'LPWAN/MeterPassport'
-        elif 'Instants' in topic:
-            self.topic = 'LPWAN/Instants'
+
+        # if 'Events' in topic:
+            # self.topic = 'LPWAN/Events'
+        # if 'MeterState' in topic:
+            # self.topic = 'LPWAN/MeterState'
+        # if 'Archive' in topic:
+            # self.topic = 'LPWAN/Archive'
+        # if 'MeterPassport' in topic:
+            # self.topic = 'LPWAN/MeterPassport'
+        #elif 'Instants' in topic:
+           # self.topic = 'LPWAN/Instants'
 
 
 def connection():
