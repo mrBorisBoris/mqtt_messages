@@ -22,6 +22,10 @@ config['93.188.43.181']['password'] = 'aineekeechohdoo7haecah3r'
 config['172.20.19.48'] = {}
 config['172.20.19.48']['user'] = 'psqlar'
 config['172.20.19.48']['password'] = 'Hgft667rD454w4e'
+config['172.20.19.48']['port'] = str(5432)
+config['172.20.19.48']['database'] = "postgres"
+config['172.20.19.48']['host'] = "172.20.19.48"
+
 
 # other
 

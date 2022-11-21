@@ -1,7 +1,6 @@
 import psycopg2
 from psycopg2 import Error
-import collections
-import time
+import config
 import logging
 import codecs
 
@@ -18,12 +17,12 @@ logging.error('--- Logging error ---', exc_info=True)
 def postgre_code(record, topic):
     try:
         # Подключиться к существующей базе данных
-        connection = psycopg2.connect(user="psqlar",
+        connection = psycopg2.connect(user=config.config['172.20.19.48']['user'],
                                       # пароль, который указали при установке PostgreSQL
-                                      password="Hgft667rD454w4e",
-                                      host="172.20.19.48",
-                                      port="5432",
-                                      database="postgres")
+                                      password=config.config['172.20.19.48']['password'],
+                                      host=config.config['172.20.19.48']['host'],
+                                      port=config.config['172.20.19.48']['port'],
+                                      database=config.config['172.20.19.48']['database'])
 
         cursor = connection.cursor()
         postgres_insert_query = """ INSERT INTO lpwan.mquery(topic, payload)
