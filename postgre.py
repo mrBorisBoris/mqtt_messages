@@ -15,7 +15,7 @@ logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
 logging.error('--- Logging error ---', exc_info=True)
 
 
-def postgre_code(record):
+def postgre_code(record, topic):
     try:
         # Подключиться к существующей базе данных
         connection = psycopg2.connect(user="psqlar",
@@ -29,7 +29,7 @@ def postgre_code(record):
         postgres_insert_query = """ INSERT INTO lpwan.mquery(topic, payload)
                                            VALUES (%s,%s)"""
         # LPWAN = 'Incotex/TEST'
-        record_to_insert = ('Incotex/TEST', str(record))
+        record_to_insert = (str(topic), str(record))
         print(record_to_insert)
         cursor.execute(postgres_insert_query, record_to_insert)
 

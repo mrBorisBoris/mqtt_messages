@@ -14,6 +14,16 @@ class  Data_MQTT():
     def __init__(self, topic, payload):
         self.topic = str(topic)
         self.payload = str(payload, 'UTF-8')
+        if 'Events' in topic:
+            self.topic = 'LPWAN/Events'
+        if 'MeterState' in topic:
+            self.topic = 'LPWAN/MeterState'
+        if 'Archive' in topic:
+            self.topic = 'LPWAN/Archive'
+        if 'MeterPassport' in topic:
+            self.topic = 'LPWAN/MeterPassport'
+        elif 'Instants' in topic:
+            self.topic = 'LPWAN/Instants'
 
 
 logging.basicConfig(level=logging.INFO,
@@ -49,11 +59,10 @@ def on_message(client, userdata, msg):
     # logging.info(msg.payload)
     queue_to.append(msg.payload)
     topic_to_record = data_mqtt.topic
-    print(type(topic_to_record))
-    print(data_mqtt.topic)
+    # print(data_mqtt.topic)
     record_to = data_mqtt.payload
     queue_to.popleft()
-    postgre.postgre_code(str(record_to))
+    postgre.postgre_code(record_to, topic_to_record)
 
 
 queue_to = collections.deque()
