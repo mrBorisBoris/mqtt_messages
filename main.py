@@ -80,7 +80,7 @@ client.username_pw_set(username=config.config['93.188.43.181']['user'],
                        password=config.config['93.188.43.181']['password'])
 print("Connecting...")
 connection()
-client.connect("93.188.43.181", int(config.config['93.188.43.181']['port']))
+client.connect(config.config['93.188.43.181']['host'], int(config.config['93.188.43.181']['port']))
 client.loop_forever()
 
 

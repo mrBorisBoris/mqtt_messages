@@ -13,6 +13,7 @@ config = configparser.ConfigParser()
 # mqtt
 
 config['93.188.43.181'] = {}
+config['93.188.43.181']['host'] = '93.188.43.181'
 config['93.188.43.181']['port'] = str(8883)
 config['93.188.43.181']['user'] = 'client1'
 config['93.188.43.181']['password'] = 'aineekeechohdoo7haecah3r'
