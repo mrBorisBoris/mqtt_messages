@@ -33,8 +33,7 @@ class  Data_MQTT():
 
 # logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
 # logging.error('--- Logging error ---', exc_info=True)
-logger_file.logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
-logger_file.logging.error('--- Logging error ---', exc_info=True)
+# logger_file.logging.error('--- Logging error ---', exc_info=True)
 
 
 
@@ -42,6 +41,7 @@ def connection():
     try:
         client.connect("93.188.43.181", 8883)
     except OSError:
+        logger_file.logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
         print('Ошибка соединения!')
         time.sleep(1)
         connection()
@@ -57,8 +57,8 @@ def on_message(client, userdata, msg):
     print(msg.topic, msg.payload)
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
 
-    logger_file.logging.info(msg.topic)
-    logger_file.logging.info(msg.payload)
+    # logger_file.logging.info(msg.topic)
+    # logger_file.logging.info(msg.payload)
     queue_to.append(msg.payload)
     topic_to_record = data_mqtt.topic
     # print(data_mqtt.topic)
