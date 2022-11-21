@@ -14,6 +14,7 @@ logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
 logging.error('--- Logging error ---', exc_info=True)
 
 
+
 def postgre_code(record, topic):
     try:
         # Подключиться к существующей базе данных
