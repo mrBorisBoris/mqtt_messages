@@ -2,7 +2,6 @@ import psycopg2
 from psycopg2 import Error
 import collections
 import time
-import paho.mqtt.client as mqtt
 import logging
 import codecs
 
@@ -14,6 +13,8 @@ logging.basicConfig(level=logging.INFO,
 
 logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
 logging.error('--- Logging error ---', exc_info=True)
+
+
 def postgre_code(record):
     try:
         # Подключиться к существующей базе данных

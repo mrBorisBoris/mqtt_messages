@@ -12,7 +12,7 @@ import config
 class  Data_MQTT():
     """Общий класс входящей информации"""
     def __init__(self, topic, payload):
-        self.topic = topic
+        self.topic = str(topic)
         self.payload = str(payload, 'UTF-8')
 
 
@@ -48,6 +48,9 @@ def on_message(client, userdata, msg):
     # logging.info(msg.topic)
     # logging.info(msg.payload)
     queue_to.append(msg.payload)
+    topic_to_record = data_mqtt.topic
+    print(type(topic_to_record))
+    print(data_mqtt.topic)
     record_to = data_mqtt.payload
     queue_to.popleft()
     postgre.postgre_code(str(record_to))
@@ -60,7 +63,6 @@ client = mqtt.Client(client_id="client1", clean_session=True, userdata=None, pro
 
 client.on_connect = on_connect
 client.on_message = on_message
-
 
 
 client.username_pw_set(username="client1", password="aineekeechohdoo7haecah3r")
