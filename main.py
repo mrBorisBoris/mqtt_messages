@@ -26,17 +26,6 @@ class  Data_MQTT():
             self.topic = 'LPWAN/Instants'
 
 
-# logging.basicConfig(level=logging.INFO,
-#                    filename="py_log.log",
-#                    filemode="w",
-#                    format="%(asctime)s %(levelname)s %(message)s")
-
-# logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
-# logging.error('--- Logging error ---', exc_info=True)
-# logger_file.logging.error('--- Logging error ---', exc_info=True)
-
-
-
 def connection():
     try:
         client.connect("93.188.43.181", 8883)
@@ -47,14 +36,13 @@ def connection():
         connection()
 
 
-
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code", rc)
     client.subscribe("Incotex/#")
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic, msg.payload)
+    # print(msg.topic, msg.payload)
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
 
     # logger_file.logging.info(msg.topic)
@@ -70,7 +58,11 @@ def on_message(client, userdata, msg):
 queue_to = collections.deque()
 
 
-client = mqtt.Client(client_id="client1", clean_session=True, userdata=None, protocol=mqtt.MQTTv311, transport="tcp")
+client = mqtt.Client(client_id="client1",
+                     clean_session=True,
+                     userdata=None,
+                     protocol=mqtt.MQTTv311,
+                     transport="tcp")
 
 client.on_connect = on_connect
 client.on_message = on_message
