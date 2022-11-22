@@ -4,28 +4,28 @@ import os
 
 class Other:
     def __init__(self, ini_path, ini_name):
-        self.ini_path = os.path.abspath('mqtt_messages/config.ini')
-        self.ini_name = 'config.ini'
+        self.ini_path = ini_path
+        self.ini_name = ini_name
 
 
 config = configparser.ConfigParser()
 
 # mqtt
 
-config['93.188.43.181'] = {}
-config['93.188.43.181']['host'] = '93.188.43.181'
-config['93.188.43.181']['port'] = str(8883)
-config['93.188.43.181']['user'] = 'client1'
-config['93.188.43.181']['password'] = 'aineekeechohdoo7haecah3r'
+config['MQTT'] = {}
+config['MQTT']['host'] = '93.188.43.181'
+config['MQTT']['port'] = str(8883)
+config['MQTT']['user'] = 'client1'
+config['MQTT']['password'] = 'aineekeechohdoo7haecah3r'
 
 # postgre
 
-config['172.20.19.48'] = {}
-config['172.20.19.48']['user'] = 'psqlar'
-config['172.20.19.48']['password'] = 'Hgft667rD454w4e'
-config['172.20.19.48']['port'] = str(5432)
-config['172.20.19.48']['database'] = "postgres"
-config['172.20.19.48']['host'] = "172.20.19.48"
+config['POSTGRE'] = {}
+config['POSTGRE']['user'] = 'psqlar'
+config['POSTGRE']['password'] = 'Hgft667rD454w4e'
+config['POSTGRE']['port'] = str(5432)
+config['POSTGRE']['database'] = "postgres"
+config['POSTGRE']['host'] = "172.20.19.48"
 
 
 # other
@@ -42,6 +42,7 @@ with open('config.ini', 'w') as configfile:
 
 # file_name = os.path.abspath('mqtt_messages/config.ini')
 other = Other(os.path.abspath('mqtt_messages/config.ini'), 'config.ini')
+
 # print(other.ini_name)
 # print(other.ini_path)
 

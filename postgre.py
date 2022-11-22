@@ -8,12 +8,12 @@ import codecs
 def postgre_code(record, topic):
     try:
         # Подключиться к существующей базе данных
-        connection = psycopg2.connect(user=config.config['172.20.19.48']['user'],
+        connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
                                       # пароль, который указали при установке PostgreSQL
-                                      password=config.config['172.20.19.48']['password'],
-                                      host=config.config['172.20.19.48']['host'],
-                                      port=config.config['172.20.19.48']['port'],
-                                      database=config.config['172.20.19.48']['database'])
+                                      password=config.config['POSTGRE']['password'],
+                                      host=config.config['POSTGRE']['host'],
+                                      port=config.config['POSTGRE']['port'],
+                                      database=config.config['POSTGRE']['database'])
 
         cursor = connection.cursor()
         postgres_insert_query = """ INSERT INTO lpwan.mquery(topic, payload)

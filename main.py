@@ -69,11 +69,11 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 
-client.username_pw_set(username=config.config['93.188.43.181']['user'],
-                       password=config.config['93.188.43.181']['password'])
+client.username_pw_set(username=config.config['MQTT']['user'],
+                       password=config.config['MQTT']['password'])
 print("Connecting...")
 connection()
-client.connect(config.config['93.188.43.181']['host'], int(config.config['93.188.43.181']['port']))
+client.connect(config.config['MQTT']['host'], int(config.config['MQTT']['port']))
 client.loop_forever()
 
 
