@@ -7,6 +7,7 @@ import logger_file
 import postgre
 import codecs
 import config
+import json
 
 
 class  Data_MQTT():
@@ -14,6 +15,8 @@ class  Data_MQTT():
     def __init__(self, topic, payload):
         self.topic = str(topic)
         self.payload = str(payload, 'UTF-8')
+
+
 
         # if 'Events' in topic:
             # self.topic = 'LPWAN/Events'
@@ -56,6 +59,7 @@ def on_message(client, userdata, msg):
     postgre.postgre_code(record_to, topic_to_record)
 
 
+
 queue_to = collections.deque()
 
 
@@ -67,6 +71,9 @@ client = mqtt.Client(client_id="client1",
 
 client.on_connect = on_connect
 client.on_message = on_message
+
+
+
 
 
 client.username_pw_set(username=config.config['MQTT']['user'],

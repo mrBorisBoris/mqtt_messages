@@ -33,12 +33,12 @@ def postgre_code(record, topic):
         logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
 
         postgre_code(record, topic)
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-            print("Соединение с PostgreSQL закрыто")
-            logger_file.logging.info('Соединение с PostgreSQL закрыто')
+    # finally:
+        # if connection:
+        #    cursor.close()
+        #    connection.close()
+        #    print("Соединение с PostgreSQL закрыто")
+        #    logger_file.logging.info('Соединение с PostgreSQL закрыто')
 
 
 
