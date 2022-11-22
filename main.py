@@ -18,16 +18,29 @@ class  Data_MQTT():
 
 
 
-        # if 'Events' in topic:
-            # self.topic = 'LPWAN/Events'
-        # if 'MeterState' in topic:
-            # self.topic = 'LPWAN/MeterState'
-        # if 'Archive' in topic:
-            # self.topic = 'LPWAN/Archive'
-        # if 'MeterPassport' in topic:
-            # self.topic = 'LPWAN/MeterPassport'
-        #elif 'Instants' in topic:
-           # self.topic = 'LPWAN/Instants'
+class Queue():
+    def __init__(self):
+        self.queue = []
+
+    def push(self, element):
+        self.queue.append(element)
+
+    def get_topic(self):
+        return self.queue.pop(0)
+
+    def get_payload(self):
+        return self.queue.pop(0)
+
+    def is_not_empty(self):
+        if len(self.queue) != 0:
+            return True
+        else:
+            return False
+    def whats_in(self):
+        return self.queue
+
+
+
 
 
 def connection():
@@ -46,21 +59,24 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    # print(msg.topic, msg.payload)
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
+    if data_mqtt.topic:
+        queue_to.push(data_mqtt.topic)
+    if data_mqtt.payload:
+        queue_to.push(data_mqtt.payload)
 
-    # logger_file.logging.info(msg.topic)
-    # logger_file.logging.info(msg.payload)
-    queue_to.append(msg.payload)
-    topic_to_record = data_mqtt.topic
-    # print(data_mqtt.topic)
-    record_to = data_mqtt.payload
-    queue_to.popleft()
-    postgre.postgre_code(record_to, topic_to_record)
-
+    if queue_to.is_not_empty():
+        record_to_insert = (str(queue_to.get_topic()), str(queue_to.get_payload()))
+        postgre.postgre_code(record_to_insert)
 
 
-queue_to = collections.deque()
+
+queue_to = Queue()
+
+
+
+
+
 
 
 client = mqtt.Client(client_id="client1",
@@ -71,8 +87,13 @@ client = mqtt.Client(client_id="client1",
 
 client.on_connect = on_connect
 client.on_message = on_message
-
-
+# if queue_to.is_not_empty():
+#   print(queue_to.whats_in())
+#    topic_to_push = queue_to.get_topic()
+#
+#    payload_to_push = queue_to.get_payload()
+#
+#    postgre.postgre_code(payload_to_push, topic_to_push)
 
 
 
