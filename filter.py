@@ -9,3 +9,4 @@ def data_filter(data):
     ev_journal = data_dict['eventsParams']['Events'][0]['EventInfo']['JournalType']
     all_data = (modem_id, ev_time, ev_code, ev_type, ev_journal)
     return all_data
+    # Функция при её вызове возвращает готовый кортеж для отправки в postgre

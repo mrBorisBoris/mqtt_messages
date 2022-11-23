@@ -81,6 +81,8 @@ def on_message(client, userdata, msg):
     print(global_data)
 
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
+
+    """Подключение модуля фильтрации к Events"""
     if 'Events' in data_mqtt.topic:
         filtered_data = filter.data_filter(data_mqtt.payload)
         print(filtered_data)
