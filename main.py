@@ -8,6 +8,15 @@ import postgre
 import codecs
 import config
 import json
+import filter
+
+from queue import Queue
+global_data = ''
+msg_topic = None
+msg_payload = None
+if msg_payload != None:
+    print('GLOBAL', msg_payload)
+    print('GLOBAL', msg_topic)
 
 
 class  Data_MQTT():
@@ -18,7 +27,7 @@ class  Data_MQTT():
 
 
 
-class Queue():
+class Queue_1():
     def __init__(self):
         self.queue = []
 
@@ -40,6 +49,10 @@ class Queue():
         return self.queue
 
 
+def global_update(data):
+    print('GLOBAL', data)
+    time.sleep(1)
+    global_update(data)
 
 
 
@@ -59,10 +72,26 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
+    global msg_topic
+    global msg_payload
+    msg_topic = msg.topic
+    msg_payload = msg.payload
+    global global_data
+    global_data = (msg.topic + str(msg.payload, 'UTF-8'))
+    print(global_data)
+
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
+    if 'Events' in data_mqtt.topic:
+        filtered_data = filter.data_filter(data_mqtt.payload)
+        print(filtered_data)
+
+
     if data_mqtt.topic:
         queue_to.push(data_mqtt.topic)
+        q.put(data_mqtt.topic)
+        print(q.get())
     if data_mqtt.payload:
+        q.put(data_mqtt.payload)
         queue_to.push(data_mqtt.payload)
 
     if queue_to.is_not_empty():
@@ -71,10 +100,20 @@ def on_message(client, userdata, msg):
 
 
 
-queue_to = Queue()
+queue_to = Queue_1()
+
+if msg_payload != None:
+    print('GLOBAL', msg_payload)
+    print('GLOBAL', msg_topic)
+if msg_topic != None:
+    print('it works')
 
 
+q = Queue()
+if not q.empty():
+    print(q.get())
 
+print(global_data)
 
 
 
