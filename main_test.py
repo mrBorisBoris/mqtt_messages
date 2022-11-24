@@ -25,7 +25,7 @@ class MQTT():
 
         def connection():
             try:
-                client.connect(config.config['MQTT']['host'], config.config['MQTT']['port'])
+                client.connect(config.config['MQTT']['host'], int(config.config['MQTT']['port']))
             except OSError:
                 logger_file.logging.error('OSError: [Errno 51] Network is unreachable', exc_info=True)
                 print('Ошибка соединения!')
@@ -37,16 +37,26 @@ class MQTT():
             client.subscribe("Incotex/#")
 
         def on_message(client, userdata, msg):
-            #print(msg.topic, msg.payload)
-
             queue_to_global.push([msg.topic, msg.payload])
 
         def is_empty():
             print(queue_to_global.is_not_empty())
             if queue_to_global.is_not_empty():
-                print(queue_to_global.get_data())
+                all_data = queue_to_global.get_data()
+                topic = all_data[0]
+                payload = str(all_data[1], 'UTF-8')
 
-            time.sleep(1)
+                if 'Events' not in topic:
+                    record_to_insert = (str(topic), str(payload))
+                    flag = False
+                    postgre.postgre_code(record_to_insert, flag)
+                else:
+                    filtered_data = filter.data_filter(payload)
+                    flag = True
+                    postgre.postgre_code(filtered_data, flag)
+
+
+            time.sleep(5)
             is_empty()
 
 
