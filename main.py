@@ -44,8 +44,8 @@ class MQTT():
         def on_message(client, userdata, msg):
             queue_to_global.push([msg.topic, msg.payload])
 
-        def is_empty():
-            print(queue_to_global.is_not_empty())
+        def push_from_queue():
+            #print(queue_to_global.is_not_empty())
             if queue_to_global.is_not_empty():
                 all_data = queue_to_global.get_data()
                 topic = all_data[0]
@@ -62,7 +62,7 @@ class MQTT():
 
 
             time.sleep(5)
-            is_empty()
+            push_from_queue()
 
 
 
@@ -82,7 +82,7 @@ class MQTT():
         client.connect('93.188.43.181', 8883)
 
         client.loop_start()
-        is_empty()
+        push_from_queue()
 
 
 
