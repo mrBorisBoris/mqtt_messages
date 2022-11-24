@@ -1,13 +1,8 @@
-import psycopg2
-from psycopg2 import Error
-import collections
 import time
 import paho.mqtt.client as mqtt
 import logger_file
 import postgre
-import codecs
 import config
-import json
 import filter
 
 

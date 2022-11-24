@@ -2,8 +2,7 @@ import psycopg2
 from psycopg2 import Error
 import config
 import logger_file
-import codecs
-import datetime
+
 
 
 def postgre_code(record, flagged):
