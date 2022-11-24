@@ -3,9 +3,10 @@ from psycopg2 import Error
 import config
 import logger_file
 import codecs
+import datetime
 
 
-def postgre_code(record):
+def postgre_code(record, flagged):
     try:
         # Подключиться к существующей базе данных
         connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
@@ -16,18 +17,33 @@ def postgre_code(record):
                                       database=config.config['POSTGRE']['database'])
 
         cursor = connection.cursor()
-        record_to_insert = record
-        print(record_to_insert)
+        if not flagged:
+            record_to_insert = record
+            print(record_to_insert)
 
-        postgres_insert_query = """ INSERT INTO lpwan.mquery(topic, payload)
+            postgres_insert_query = """ INSERT INTO lpwan.mquery(topic, payload)
                                            VALUES (%s,%s)"""
 
-        cursor.execute(postgres_insert_query, record_to_insert)
+            cursor.execute(postgres_insert_query, record_to_insert)
 
-        connection.commit()
-        count = cursor.rowcount
-        print(count, "Запись успешно добавлена в таблицy mquery")
-        logger_file.logging.info('Запись успешно добавлена в таблицy')
+            connection.commit()
+            count = cursor.rowcount
+            print(count, "Запись успешно добавлена в таблицy mquery")
+            logger_file.logging.info('Запись успешно добавлена в таблицy')
+        elif flagged:
+            record_to_insert = record
+            print(record_to_insert)
+
+            postgres_insert_query = """ INSERT INTO lpwan.events(modem_id, ev_time, ev_code, ev_type, journal)
+                                                       VALUES (%s,%s,%s,%s,%s)"""
+
+            cursor.execute(postgres_insert_query, record_to_insert)
+
+            connection.commit()
+            count = cursor.rowcount
+            print(count, "Запись успешно добавлена в таблицy events")
+            logger_file.logging.info('Запись успешно добавлена в таблицy events')
+
             #if 'Events' in record_to_insert[0]:
             #postgres_insert_query = """ INSERT INTO lpwan.events(modem_id, ev_time, ev_code, ev_type, journal)
             #                                          VALUES (%s,%s,%s,%s,%s)"""
@@ -45,7 +61,7 @@ def postgre_code(record):
         print("Ошибка при работе с PostgreSQL", error)
         logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
 
-        postgre_code(record)
+        postgre_code(record, flagged)
     # finally:
         # if connection:
         #    cursor.close()

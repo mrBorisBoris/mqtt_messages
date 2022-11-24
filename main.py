@@ -72,33 +72,26 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    global msg_topic
-    global msg_payload
-    msg_topic = msg.topic
-    msg_payload = msg.payload
-    global global_data
-    global_data = (msg.topic + str(msg.payload, 'UTF-8'))
-    print(global_data)
-
     data_mqtt = Data_MQTT(msg.topic, msg.payload)
+    q.put([data_mqtt.topic, data_mqtt.payload])
+    new_data_object = q.get()
+    data_topic = new_data_object[0]
+    data_payload = new_data_object[1]
 
     """Подключение модуля фильтрации к Events"""
-    if 'Events' in data_mqtt.topic:
+    if 'Events' not in data_topic:
+        record_to_insert = (str(data_topic), str(data_payload))
+        flag = False
+        postgre.postgre_code(record_to_insert, flag)
+
+    else:
         filtered_data = filter.data_filter(data_mqtt.payload)
+        flag = True
+        record_to_insert = filtered_data
+        postgre.postgre_code(record_to_insert, flag)
         print(filtered_data)
 
 
-    if data_mqtt.topic:
-        queue_to.push(data_mqtt.topic)
-        q.put(data_mqtt.topic)
-        print(q.get())
-    if data_mqtt.payload:
-        q.put(data_mqtt.payload)
-        queue_to.push(data_mqtt.payload)
-
-    if queue_to.is_not_empty():
-        record_to_insert = (str(queue_to.get_topic()), str(queue_to.get_payload()))
-        postgre.postgre_code(record_to_insert)
 
 
 
