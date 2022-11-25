@@ -4,6 +4,9 @@ import logger_file
 import postgre
 import config
 import filter
+import sys
+
+sys.setrecursionlimit(20000)
 
 
 class  Data_MQTT():
