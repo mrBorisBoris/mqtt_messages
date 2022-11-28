@@ -6,7 +6,7 @@ import config
 import filter
 import sys
 
-sys.setrecursionlimit(20000)
+sys.setrecursionlimit(2000000)
 
 
 class  Data_MQTT():
@@ -16,6 +16,7 @@ class  Data_MQTT():
         self.payload = str(payload, 'UTF-8')
 
 class MQTT():
+    """Общий класс объекта клиента"""
     def __init__(self, client):
         self.client = mqtt.Client(client_id="client1",
                                   clean_session=True,
@@ -25,6 +26,7 @@ class MQTT():
 
 
     def MQTT_start(self):
+        """Запуск клиента"""
 
         def connection():
             try:
@@ -53,6 +55,8 @@ class MQTT():
                     record_to_insert = (str(topic), str(payload))
                     flag = False
                     postgre.postgre_code(record_to_insert, flag)
+                elif 'Answer/Archive' in topic:
+                    pass
                 else:
                     filtered_data = filter.data_filter(payload)
                     flag = True
@@ -81,7 +85,7 @@ class MQTT():
 
         client.loop_start()
         push_from_queue()
-
+        client.loop_stop()
 
 
 class Queue_1():
