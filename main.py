@@ -5,6 +5,7 @@ import postgre
 import config
 import filter
 import sys
+import archive_filter
 
 sys.setrecursionlimit(2000000)
 
@@ -56,7 +57,9 @@ class MQTT():
                     flag = False
                     postgre.postgre_code(record_to_insert, flag)
                 elif 'Answer/Archive' in topic:
-                    pass
+                    filtered_archive = archive_filter.archive_filter(payload)
+                    print(filtered_archive) #ДАЛЬШЕ РАБОТАТЬ С ЭТОГО МЕСТА
+
                 else:
                     filtered_data = filter.data_filter(payload)
                     flag = True
