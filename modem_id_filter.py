@@ -8,14 +8,15 @@ def filter_modems(data):
         except ValueError:
             pass
 
-    #print(modem)
-
-    if modem[0] in range(47208000, 47208099):
+    try:
+       if modem[0] in range(47208000, 47208099):
         #print('ok')
-        return True
-    elif modem[0] in range(47236509, 47236518):
+           return True
+       elif modem[0] in range(47236509, 47236518):
         #print('ok')
-        return True
-    else:
+           return True
+       else:
         #print('not ok')
+           return False
+    except IndexError:
         return False
