@@ -52,18 +52,23 @@ class MQTT():
                 topic = all_data[0]
                 payload = str(all_data[1], 'UTF-8')
 
-                if 'Events' not in topic:
+                if 'Event/Archive' in topic:
+                    filtered_data_archive = archive_filter.archive_filter(topic, payload)
+                    if filtered_data_archive is not None:
+                        print(filtered_data_archive)
+                        flag = 'ArchiveNumber2'
+                        postgre.postgre_code(filtered_data_archive, flag)
+
+                if 'Events' in topic:
+
+                    filtered_data = filter.data_filter(payload)
+                    flag = 'Events'
+                    postgre.postgre_code(filtered_data, flag)
+
+                else:
                     record_to_insert = (str(topic), str(payload))
                     flag = False
                     postgre.postgre_code(record_to_insert, flag)
-                elif 'Answer/Archive' in topic:
-                    filtered_archive = archive_filter.archive_filter(payload)
-                    print(filtered_archive) #ДАЛЬШЕ РАБОТАТЬ С ЭТОГО МЕСТА
-
-                else:
-                    filtered_data = filter.data_filter(payload)
-                    flag = True
-                    postgre.postgre_code(filtered_data, flag)
 
 
             time.sleep(5)

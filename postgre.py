@@ -29,7 +29,20 @@ def postgre_code(record, flagged):
             count = cursor.rowcount
             print(count, "Запись успешно добавлена в таблицy mquery")
             logger_file.logging.info('Запись успешно добавлена в таблицy')
-        elif flagged:
+
+        if flagged == 'ArchiveNumber2':
+            record_to_insert = record
+            print(record_to_insert)
+            postgres_insert_query = """ INSERT INTO lpwan.devdaily(modem_id, act, act1, act2, react, act_minus, react_minus, devtime,  devdata)
+            VALUES (%s,%s,s%,s%,s%,s%,s%,s%, '{"param":1}')"""
+
+            cursor.execute(postgres_insert_query, record_to_insert)
+            connection.commit()
+            count = cursor.rowcount
+            print(count, "Запись успешно добавлена в таблицy dev_data")
+            logger_file.logging.info('Запись успешно добавлена в таблицy dev_data')
+
+        if flagged == 'Events':
             record_to_insert = record
             print(record_to_insert)
 
@@ -42,16 +55,6 @@ def postgre_code(record, flagged):
             print(count, "Запись успешно добавлена в таблицy events")
             logger_file.logging.info('Запись успешно добавлена в таблицy events')
 
-            #if 'Events' in record_to_insert[0]:
-            #postgres_insert_query = """ INSERT INTO lpwan.events(modem_id, ev_time, ev_code, ev_type, journal)
-            #                                          VALUES (%s,%s,%s,%s,%s)"""
-            # data = ('test', 'test', 'test', 'test', 'test')
-            # cursor.execute(postgres_insert_query, data)
-
-            # connection.commit()
-            # count = cursor.rowcount
-            #print(count, "Запись успешно добавлена в таблицy events")
-            # logger_file.logging.info('Запись успешно добавлена в таблицy')
 
 
 
