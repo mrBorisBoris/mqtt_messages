@@ -63,12 +63,6 @@ def postgre_code(record, flagged):
         logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
 
         postgre_code(record, flagged)
-    # finally:
-        # if connection:
-        #    cursor.close()
-        #    connection.close()
-        #    print("Соединение с PostgreSQL закрыто")
-        #    logger_file.logging.info('Соединение с PostgreSQL закрыто')
 
 
 

@@ -6,6 +6,7 @@ import config
 import filter
 import sys
 import archive_filter
+import modem_id_filter
 
 sys.setrecursionlimit(2000000)
 
@@ -43,10 +44,18 @@ class MQTT():
             client.subscribe("Incotex/#")
 
         def on_message(client, userdata, msg):
-            queue_to_global.push([msg.topic, msg.payload])
+            check_modem = msg.topic
+            checked = modem_id_filter.filter_modems(check_modem)
+            if checked:
+                queue_to_global.push([msg.topic, msg.payload])
+            else:
+                pass
+
+
+
 
         def push_from_queue():
-            #print(queue_to_global.is_not_empty())
+
             if queue_to_global.is_not_empty():
                 all_data = queue_to_global.get_data()
                 topic = all_data[0]
@@ -119,8 +128,3 @@ class Queue_1():
 
 
 queue_to_global = Queue_1()
-MQTT_starter = MQTT(client=mqtt.Client(client_id="client1",
-                                  clean_session=True,
-                                  userdata=None,
-                                  protocol=mqtt.MQTTv311,
-                                  transport="tcp"))
