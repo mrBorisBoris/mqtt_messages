@@ -1,4 +1,3 @@
-
 def filter_modems(data):
     string = data
     modem = []
@@ -9,14 +8,11 @@ def filter_modems(data):
             pass
 
     try:
-       if modem[0] in range(47208000, 47208099):
-        #print('ok')
-           return True
-       elif modem[0] in range(47236509, 47236518):
-        #print('ok')
-           return True
-       else:
-        #print('not ok')
-           return False
+        if modem[0] in range(47208000, 47208099):
+            return True
+        elif modem[0] in range(47236509, 47236518):
+            return True
+        else:
+            return False
     except IndexError:
         return False
