@@ -7,6 +7,7 @@ import filter
 import sys
 import archive_filter
 import modem_id_filter
+import queue_class
 
 sys.setrecursionlimit(2000000)
 
@@ -44,18 +45,13 @@ class MQTT():
             client.subscribe("Incotex/#")
 
         def on_message(client, userdata, msg):
-            check_modem = msg.topic
-            checked = modem_id_filter.filter_modems(check_modem)
+            checked = modem_id_filter.filter_modems(msg.topic)
             if checked:
                 queue_to_global.push([msg.topic, msg.payload])
             else:
                 pass
 
-
-
-
         def push_from_queue():
-
             if queue_to_global.is_not_empty():
                 all_data = queue_to_global.get_data()
                 topic = all_data[0]
@@ -105,26 +101,4 @@ class MQTT():
         client.loop_stop()
 
 
-class Queue_1():
-    def __init__(self):
-        self.queue = []
-
-    def push(self, element):
-        self.queue.append(element)
-
-    def get_data(self):
-        return self.queue.pop(0)
-
-    def is_not_empty(self):
-        if len(self.queue) != 0:
-            return True
-        else:
-            return False
-
-
-
-
-
-
-
-queue_to_global = Queue_1()
+queue_to_global = queue_class.Queue_1()
