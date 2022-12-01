@@ -39,8 +39,8 @@ def postgre_code(record, flagged):
             cursor.execute(postgres_insert_query, record_to_insert)
             connection.commit()
             count = cursor.rowcount
-            print(count, "Запись успешно добавлена в таблицy dev_data")
-            logger_file.logging.info('Запись успешно добавлена в таблицy dev_data')
+            print(count, "Запись успешно добавлена в таблицy dev_daily")
+            logger_file.logging.info('Запись успешно добавлена в таблицy dev_daily')
 
         if flagged == 'Events':
             record_to_insert = record

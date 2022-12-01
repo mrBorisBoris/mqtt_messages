@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import MQTT_start
+import postgre_get_data
 
 
 
@@ -15,6 +16,7 @@ MQTT_starter = MQTT_start.MQTT(client=mqtt.Client(client_id="client1",
                                   userdata=None,
                                   protocol=mqtt.MQTTv311,
                                   transport="tcp"))
+postgre_get_data.check_message_to_mqtt()
 MQTT_starter.MQTT_start()
 
 
