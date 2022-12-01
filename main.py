@@ -1,6 +1,10 @@
 import paho.mqtt.client as mqtt
 import MQTT_start
-import postgre_get_data
+
+import threading
+
+
+
 
 
 
@@ -10,14 +14,21 @@ import postgre_get_data
 #        self.topic = str(topic)
 #        self.payload = str(payload, 'UTF-8')
 
+def start_one():
+    MQTT_starter = MQTT_start.MQTT(client=mqtt.Client(client_id="client1",
+                                                      clean_session=True,
+                                                      userdata=None,
+                                                      protocol=mqtt.MQTTv311,
+                                                      transport="tcp"))
+    MQTT_starter.MQTT_start()
 
-MQTT_starter = MQTT_start.MQTT(client=mqtt.Client(client_id="client1",
-                                  clean_session=True,
-                                  userdata=None,
-                                  protocol=mqtt.MQTTv311,
-                                  transport="tcp"))
-postgre_get_data.check_message_to_mqtt()
-MQTT_starter.MQTT_start()
+
+t = threading.Thread(target=start_one(), args=())
+t.start()
+
+
+
+
 
 
 

@@ -8,7 +8,7 @@ import sys
 import archive_filter
 import modem_id_filter
 import queue_class
-import postgre_get_data
+#import psycopg_test
 
 sys.setrecursionlimit(2000000)
 
@@ -110,7 +110,8 @@ class MQTT():
         client.connect('93.188.43.181', 8883)
 
         client.loop_start()
-        queue = postgre_get_data.queue_to_mqtt
+        queue = queue_class.Queue_1()
+        #queue = psycopg_test.queue_to_mqtt
         push_from_postgre()
         push_from_queue()
         client.loop_stop()
