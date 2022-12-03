@@ -5,7 +5,8 @@ import logger_file
 import time
 import json
 
-time.sleep(5)
+def connect_now():
+    connect()
 
 def push_data_to_mqtt(data):
     max_id = 0
@@ -65,4 +66,4 @@ def connect():
 
 data = []
 queue_to_mqtt = queue_class.Queue_1()
-connect()
+
