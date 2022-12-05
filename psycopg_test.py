@@ -5,7 +5,7 @@ import logger_file
 import time
 import json
 import threading
-import MQTT_thread
+
 
 def connect_now():
     a = int(input('Update data? 1/0'))
