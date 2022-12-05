@@ -4,9 +4,22 @@ import queue_class
 import logger_file
 import time
 import json
+import threading
+import MQTT_thread
 
 def connect_now():
-    connect()
+    a = int(input('Update data? 1/0'))
+    if a == 1:
+        connect()
+    else:
+        try:
+            try_thread.join()
+        except NameError:
+            logger_file.logging.error('Update Error', exc_info=True)
+            try_thread.join()
+
+
+
 
 def push_data_to_mqtt(data):
     max_id = 0
@@ -43,6 +56,7 @@ def update_data(all_data):
                 data.append(i_elem)
             else:
                 print('data exists')
+                connect_now()
                 pass
         print(data)
         return data
@@ -66,4 +80,9 @@ def connect():
 
 data = []
 queue_to_mqtt = queue_class.Queue_1()
+
+
+
+
+try_thread = threading.Thread(target=connect_now(), args=())
 

@@ -1,9 +1,6 @@
-import paho.mqtt.client as mqtt
-import MQTT_start
-
 import threading
-
-
+import psycopg_test
+import MQTT_thread
 
 
 
@@ -14,17 +11,21 @@ import threading
 #        self.topic = str(topic)
 #        self.payload = str(payload, 'UTF-8')
 
-def start_one():
-    MQTT_starter = MQTT_start.MQTT(client=mqtt.Client(client_id="client1",
-                                                      clean_session=True,
-                                                      userdata=None,
-                                                      protocol=mqtt.MQTTv311,
-                                                      transport="tcp"))
-    MQTT_starter.MQTT_start()
 
 
-t = threading.Thread(target=start_one(), args=())
-t.start()
+
+
+
+
+#t = threading.Thread(target=MQTT_thread.start_one(), args=())
+
+psycopg = threading.Timer(3, psycopg_test.try_thread)
+mqtt = threading.Timer(1, MQTT_thread.start_one())
+
+#t.start()
+mqtt.start()
+psycopg.start()
+
 
 
 
