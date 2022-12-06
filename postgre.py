@@ -2,7 +2,16 @@ import psycopg2
 from psycopg2 import Error
 import config
 import logger_file
+import time
 
+
+def reconnect():
+   connection = psycopg2.connect(database=config.config['POSTGRE']['database'],
+                              user=config.config['POSTGRE']['user'],
+                              password=config.config['POSTGRE']['password'],
+                                 host=config.config['POSTGRE']['host'],
+                                 port=config.config['POSTGRE']['port'])
+   cursor = connection.cursor()
 
 
 
@@ -64,7 +73,11 @@ def postgre_code(record, flagged):
     except (Exception, Error) as error:
         print("Ошибка при работе с PostgreSQL", error)
         logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
-        postgre_code(record, flagged)
+        status = connection.status
+        if status != 1:
+            time.sleep(5)
+            reconnect()
+            postgre_code(record, flagged)
 
 
 
