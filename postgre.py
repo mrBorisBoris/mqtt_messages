@@ -5,6 +5,7 @@ import logger_file
 
 
 
+
 def postgre_code(record, flagged):
     try:
         # Подключиться к существующей базе данных
@@ -74,7 +75,6 @@ connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
                                   host=config.config['POSTGRE']['host'],
                                   port=config.config['POSTGRE']['port'],
                                   database=config.config['POSTGRE']['database'])
-
 cursor = connection.cursor()
 if cursor:
     print('ok')

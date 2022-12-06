@@ -13,8 +13,6 @@ def start_one():
 
 
 
-
-
 thread_1 = threading.Thread(target=start_one(), args=())
 #psycopg = threading.Timer(3, psycopg_test.try_thread)
 #psycopg.start()
