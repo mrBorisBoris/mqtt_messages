@@ -1,6 +1,7 @@
 import threading
 import MQTT_start
 import paho.mqtt.client as mqtt
+import postgre
 
 def start_one():
     MQTT_starter = MQTT_start.MQTT(client=mqtt.Client(client_id="client1",
@@ -9,6 +10,7 @@ def start_one():
                                                       protocol=mqtt.MQTTv311,
                                                       transport="tcp"))
     MQTT_starter.MQTT_start()
+
 
 
 

@@ -8,14 +8,15 @@ import logger_file
 def postgre_code(record, flagged):
     try:
         # Подключиться к существующей базе данных
-        connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
+        #connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
                                       # пароль, который указали при установке PostgreSQL
-                                      password=config.config['POSTGRE']['password'],
-                                      host=config.config['POSTGRE']['host'],
-                                      port=config.config['POSTGRE']['port'],
-                                      database=config.config['POSTGRE']['database'])
+        #                              password=config.config['POSTGRE']['password'],
+        #                              host=config.config['POSTGRE']['host'],
+        #                              port=config.config['POSTGRE']['port'],
+        #                              database=config.config['POSTGRE']['database'])
 
-        cursor = connection.cursor()
+        #cursor = connection.cursor()
+
         if not flagged:
             record_to_insert = record
             print(record_to_insert)
@@ -26,7 +27,8 @@ def postgre_code(record, flagged):
             cursor.execute(postgres_insert_query, record_to_insert)
 
             connection.commit()
-            count = cursor.rowcount
+            count = cursor.rowcount  #сделать отдельным методом в классе проверку
+
             print(count, "Запись успешно добавлена в таблицy mquery")
             logger_file.logging.info('Запись успешно добавлена в таблицy')
 
@@ -61,8 +63,20 @@ def postgre_code(record, flagged):
     except (Exception, Error) as error:
         print("Ошибка при работе с PostgreSQL", error)
         logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
-
         postgre_code(record, flagged)
 
 
 
+
+connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
+                                  # пароль, который указали при установке PostgreSQL
+                                  password=config.config['POSTGRE']['password'],
+                                  host=config.config['POSTGRE']['host'],
+                                  port=config.config['POSTGRE']['port'],
+                                  database=config.config['POSTGRE']['database'])
+
+cursor = connection.cursor()
+if cursor:
+    print('ok')
+if connection:
+    print('connect ok')
