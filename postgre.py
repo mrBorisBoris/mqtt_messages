@@ -87,7 +87,7 @@ connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
                                   database=config.config['POSTGRE']['database'])
 cursor = connection.cursor()
 if cursor:
-    print('ok')
+    print('Connecting to PostgreSQL...')
 if connection:
-    print('connect ok')
-    print(connection.status)
+    print('Connected to DB.')
+    print('Connection status:', connection.status)

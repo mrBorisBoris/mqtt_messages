@@ -2,9 +2,7 @@ import time
 import paho.mqtt.client as mqtt
 import logger_file
 import config
-import filter
 import sys
-import archive_filter
 import modem_id_filter
 import queue_class
 #import psycopg_test
@@ -50,6 +48,7 @@ class MQTT():
                 queue_to_global.push([msg.topic, msg.payload])
             else:
                 pass
+
         def on_publish(client, userdata, result):
             print('data published')
 
