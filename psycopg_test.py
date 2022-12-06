@@ -19,8 +19,6 @@ def connect_now():
             try_thread.join()
 
 
-
-
 def push_data_to_mqtt(data):
     max_id = 0
     for i_data in data:
@@ -33,6 +31,8 @@ def push_data_to_mqtt(data):
             connect()
     time.sleep(5)
     connect()
+
+
 def selector(cursor):
     postgreSQL_select_Query = "SELECT id, topic, payload " \
                               "FROM lpwan.tomqtt;"
@@ -80,9 +80,6 @@ def connect():
 
 data = []
 queue_to_mqtt = queue_class.Queue_1()
-
-
-
 
 try_thread = threading.Thread(target=connect_now(), args=())
 

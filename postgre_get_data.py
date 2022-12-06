@@ -11,6 +11,7 @@ queue_to_mqtt = queue_class.Queue_1()
 count = 0
 data = []
 
+
 def check_message_to_mqtt():
         try:
             connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
