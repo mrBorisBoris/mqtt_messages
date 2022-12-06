@@ -75,6 +75,10 @@ def postgre_code(record, flagged):
             time.sleep(5)
             reconnect()
             postgre_code(record, flagged)
+        else:
+            time.sleep(5)
+            reconnect()
+            postgre_code(record, flagged)
 
 
 
@@ -85,7 +89,7 @@ connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
                                   host=config.config['POSTGRE']['host'],
                                   port=config.config['POSTGRE']['port'],
                                   database=config.config['POSTGRE']['database'])
-cursor = connection.cursor()
+cursor = connection.cursor()               #необходима проверка на наличие соединения
 if cursor:
     print('Connecting to PostgreSQL...')
 if connection:
