@@ -22,8 +22,8 @@ class Queue_1():
         all_data = self.queue.pop(0)
         topic = all_data[0]
         payload = (str(all_data[1], 'UTF-8'))
-        print(topic)
-        print(payload)
+        # print(topic)
+        # print(payload)
         if 'Event/Archive' in topic:
             filtered_data_archive = archive_filter.archive_filter(topic, payload)
             if filtered_data_archive is not None:
