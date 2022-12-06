@@ -1,7 +1,6 @@
 import time
 import paho.mqtt.client as mqtt
 import logger_file
-import postgre
 import config
 import filter
 import sys
@@ -62,34 +61,12 @@ class MQTT():
                 ret = client.publish(topic, payload)
                 push_from_postgre()
 
-        def push_from_queue():
+        def push_from_mqtt_to_postgre():
             if queue_to_global.is_not_empty():
-                all_data = queue_to_global.get_data()
-                topic = all_data[0]
-                payload = (str(all_data[1], 'UTF-8'))
-
-                if 'Event/Archive' in topic:
-                    filtered_data_archive = archive_filter.archive_filter(topic, payload)
-                    if filtered_data_archive is not None:
-                        print(filtered_data_archive)
-                        flag = 'ArchiveNumber2'
-                        logger_file.logging.info('ArchiveN2')
-                        postgre.postgre_code(filtered_data_archive, flag)
-
-                if 'Events' in topic:
-
-                    filtered_data = filter.data_filter(payload)
-                    flag = 'Events'
-                    postgre.postgre_code(filtered_data, flag)
-
-                else:
-                    record_to_insert = (str(topic), str(payload))
-                    flag = False
-                    postgre.postgre_code(record_to_insert, flag)
-
+                queue_to_global.data_filter()
 
             time.sleep(5)
-            push_from_queue()
+            push_from_mqtt_to_postgre()
 
 
 
@@ -113,7 +90,8 @@ class MQTT():
         queue = queue_class.Queue_1()
         #queue = psycopg_test.queue_to_mqtt
         push_from_postgre()
-        push_from_queue()
+        #push_from_queue()
+        push_from_mqtt_to_postgre() # Вызываем функцию на фильтрацию очереди и отправку данных
         client.loop_stop()
 
 
