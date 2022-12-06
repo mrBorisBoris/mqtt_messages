@@ -80,3 +80,4 @@ if cursor:
     print('ok')
 if connection:
     print('connect ok')
+    print(connection.status)
