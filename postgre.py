@@ -6,12 +6,12 @@ import time
 
 
 def reconnect():
-   connection = psycopg2.connect(database=config.config['POSTGRE']['database'],
+    connection = psycopg2.connect(database=config.config['POSTGRE']['database'],
                               user=config.config['POSTGRE']['user'],
                               password=config.config['POSTGRE']['password'],
                                  host=config.config['POSTGRE']['host'],
                                  port=config.config['POSTGRE']['port'])
-   cursor = connection.cursor()
+    cursor = connection.cursor()
 
 
 
@@ -66,9 +66,6 @@ def postgre_code(record, flagged):
             count = cursor.rowcount
             print(count, "Запись успешно добавлена в таблицy events")
             logger_file.logging.info('Запись успешно добавлена в таблицy events')
-
-
-
 
     except (Exception, Error) as error:
         print("Ошибка при работе с PostgreSQL", error)
