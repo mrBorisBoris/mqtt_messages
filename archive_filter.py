@@ -17,7 +17,7 @@ def archive_filter(topic, data):
         act_minus = archive['archiveValues'][2]['Values']
         react_minus = archive['archiveValues'][3]['Values']
         dev_time = archive['archiveValues'][0]['Time']
-        dev_data = archive
+        dev_data = json.dumps(archive)
         datetime_time = datetime.datetime.strptime(dev_time, '%Y-%m-%dT%H:%M:%S')
         all_data = (modem_id, act, act_1, act_2, react, act_minus, react_minus, datetime_time, dev_data)
         return all_data
