@@ -6,6 +6,7 @@ import postgre
 def archive_filter(topic, data):
     topic_data = topic
     all_data = data
+    print(type(data))
     archive = json.loads(data)
     archive_number = archive['archiveNumber']
     if archive_number == 2:
