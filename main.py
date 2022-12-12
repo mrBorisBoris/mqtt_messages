@@ -13,14 +13,12 @@ def start_one():
                                                       transport="tcp"))
     MQTT_starter.MQTT_start()
 
-#postgre_get_data.check_message_to_mqtt()
-thread_1 = threading.Thread(target=start_one(), args=())
+thread_1 = threading.Timer(15, start_one)
 thread_1.start()
 
-thread_2 = threading.Thread(target=postgre_get_data.check_message_to_mqtt(), args=())
+thread_2 = threading.Thread(target=postgre_get_data.connect_now(), args=())
 thread_2.start()
-# psycopg = threading.Timer(3, psycopg_test.try_thread)
-# psycopg.start()
+
 
 
 

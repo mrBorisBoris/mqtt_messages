@@ -58,7 +58,14 @@ class MQTT():
                 data_from = queue_to_push.get_data()
                 topic = str(data_from[0])
                 payload = data_from[1]
-                ret = client.publish(topic, payload)
+                data_typle = (topic, payload)
+                if data_typle not in data_list:
+                    data_list.append(data_typle)
+                    print('new data')
+                    ret = client.publish(topic, payload)
+                if data_typle in data_list:
+                    print('data exists')
+                # ret = client.publish(topic, payload)
                 push_from_postgre()
 
         def push_from_mqtt_to_postgre():
@@ -85,10 +92,15 @@ class MQTT():
         print("Connecting...")
         connection()
         client.connect('93.188.43.181', 8883)
+        queue_to_push = postgre_get_data.queue_to_mqtt
+        data_list = []
+        if queue_to_push.is_not_empty():
+            print('data here')
+        else:
+            print('no data')
 
         client.loop_start()
         queue = queue_class.Queue_1()
-        queue_to_push = postgre_get_data.queue_to_mqtt
         #queue = psycopg_test.queue_to_mqtt
         push_from_postgre()
         #push_from_queue()
