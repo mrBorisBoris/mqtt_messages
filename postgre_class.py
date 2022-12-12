@@ -52,7 +52,7 @@ class Postgre_To():
                 record_to_insert = record
                 print(record_to_insert)
                 postgres_insert_query = """ INSERT INTO lpwan.devdaily(modem_id, act, act1, act2, react, act_minus, react_minus, devtime, devdata)
-                    VALUES (%s,%s,s%,s%,s%,s%,s%,s%,s%)"""
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
                 self.cursor.execute(postgres_insert_query, record_to_insert)
                 self.connection.commit()

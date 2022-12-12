@@ -4,6 +4,7 @@ import logger_file
 import config
 import sys
 import modem_id_filter
+import postgre_get_data
 import queue_class
 #import psycopg_test
 
@@ -53,8 +54,8 @@ class MQTT():
             print('data published')
 
         def push_from_postgre():
-            if queue.is_not_empty():
-                data_from = queue.get_data()
+            if queue_to_push.is_not_empty():
+                data_from = queue_to_push.get_data()
                 topic = str(data_from[0])
                 payload = data_from[1]
                 ret = client.publish(topic, payload)
@@ -87,6 +88,7 @@ class MQTT():
 
         client.loop_start()
         queue = queue_class.Queue_1()
+        queue_to_push = postgre_get_data.queue_to_mqtt
         #queue = psycopg_test.queue_to_mqtt
         push_from_postgre()
         #push_from_queue()

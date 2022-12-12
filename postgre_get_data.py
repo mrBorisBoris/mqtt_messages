@@ -28,6 +28,7 @@ def check_message_to_mqtt():
             global data
 
             data = cursor.fetchall()
+            print(data)
 
 
 
@@ -39,7 +40,7 @@ def check_message_to_mqtt():
             check_message_to_mqtt()
 
 
-check_message_to_mqtt()
+#check_message_to_mqtt()
 max_id = 0
 for i_data in data:
     if i_data[0] > max_id:

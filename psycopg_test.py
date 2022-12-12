@@ -13,7 +13,8 @@ def connect_now():
         connect()
     else:
         try:
-            try_thread.join()
+            time.sleep(5)
+            connect_now()
         except NameError:
             logger_file.logging.error('Update Error', exc_info=True)
             try_thread.join()
@@ -56,7 +57,7 @@ def update_data(all_data):
                 data.append(i_elem)
             else:
                 print('data exists')
-                connect_now()
+                #connect_now()
                 pass
         print(data)
         return data
