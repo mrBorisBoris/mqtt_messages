@@ -12,6 +12,7 @@ data = []
 queue_to_mqtt = queue_class.Queue_1()
 data_to_check = []
 
+
 def create_query_to_mqtt(data):
     global queue_to_mqtt
     max_id = 0
@@ -21,7 +22,6 @@ def create_query_to_mqtt(data):
             data_payload = json.dumps(i_data[2])
             print(i_data[1], data_payload)
             queue_to_mqtt.push((i_data[1], data_payload))
-
 
         else:
             pass

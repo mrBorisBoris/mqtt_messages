@@ -101,9 +101,7 @@ class MQTT():
 
         client.loop_start()
         queue = queue_class.Queue_1()
-        #queue = psycopg_test.queue_to_mqtt
         push_from_postgre()
-        #push_from_queue()
         push_from_mqtt_to_postgre() # Вызываем функцию на фильтрацию очереди и отправку данных
         client.loop_stop()
 
