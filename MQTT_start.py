@@ -63,6 +63,7 @@ class MQTT():
                     data_list.append(data_typle)
                     print('new data')
                     ret = client.publish(topic, payload)
+                    print(ret)
                 if data_typle in data_list:
                     print('data exists')
                 # ret = client.publish(topic, payload)

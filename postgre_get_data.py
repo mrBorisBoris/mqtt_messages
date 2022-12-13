@@ -7,6 +7,8 @@ import json
 import threading
 import queue_class
 import MQTT_start
+from postgre import connection
+from postgre import cursor
 
 data = []
 queue_to_mqtt = queue_class.Queue_1()
@@ -30,12 +32,6 @@ def connect_now():
     a = int(input('Update data 1/0?'))
     if a == 1:
         try:
-            connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
-                                          password=config.config['POSTGRE']['password'],
-                                          host=config.config['POSTGRE']['host'],
-                                          port=config.config['POSTGRE']['port'],
-                                          database=config.config['POSTGRE']['database'])
-            cursor = connection.cursor()
             postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
             cursor.execute(postgreSQL_select_Query)
             print("Selecting rows from tomqtt table using cursor.fetchall")
