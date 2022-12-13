@@ -9,6 +9,7 @@ import queue_class
 import MQTT_start
 from postgre import connection
 from postgre import cursor
+import logger_file
 
 data = []
 queue_to_mqtt = queue_class.Queue_1()
@@ -26,7 +27,8 @@ def create_query_to_mqtt(data):
             queue_to_mqtt.push((i_data[1], data_payload))
 
         else:
-            pass
+            logger_file.logging.info('no new data found while check')
+            continue
 
 def connect_now():
     a = int(input('Update data 1/0?'))
@@ -45,6 +47,7 @@ def connect_now():
 
 
         except:
+            logger_file.logging.error('Connection issue while reading from PostgreSQL', exc_info=True)
             print("Connection issue")
             time.sleep(3)
             connect_now()
