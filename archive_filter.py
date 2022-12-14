@@ -1,7 +1,6 @@
 import json
 import datetime
-import postgre
-
+from postgre_class import db
 
 def archive_filter(topic, data):
     topic_data = topic
@@ -26,5 +25,5 @@ def archive_filter(topic, data):
         topic_to_insert = topic_data
         record_to_insert = (str(topic_to_insert), (str(data)))
         flag = False
-        postgre.postgre_code(record_to_insert, flag)
+        db.insert_into(record_to_insert, flag)
         return None

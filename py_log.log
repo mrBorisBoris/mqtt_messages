@@ -1,11 +1,10 @@
-2022-12-14 12:02:45,073 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:05,149 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:10,155 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:15,159 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:20,163 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:25,167 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:30,173 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:35,178 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:45,182 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:03:50,187 INFO Запись успешно добавлена в таблицy
-2022-12-14 12:04:05,191 INFO Запись успешно добавлена в таблицy
+2022-12-14 12:27:28,438 ERROR Connection issue while reading from PostgreSQL
+Traceback (most recent call last):
+  File "C:\Users\roman\PycharmProjects\mqtt_messages\postgre_get_data.py", line 46, in connect_now
+    connect_now()
+  File "C:\Users\roman\PycharmProjects\mqtt_messages\postgre_get_data.py", line 34, in connect_now
+    a = int(input('Update data 1/0?'))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: ''
+2022-12-14 12:27:38,215 INFO Запись успешно добавлена в таблицy
+2022-12-14 12:28:48,227 INFO Запись успешно добавлена в таблицy

@@ -7,90 +7,30 @@ import time
 
 
 def reconnect():
-    connection = psycopg2.connect(database=config.config['POSTGRE']['database'],
+    try:
+        connection = psycopg2.connect(database=config.config['POSTGRE']['database'],
                               user=config.config['POSTGRE']['user'],
                               password=config.config['POSTGRE']['password'],
                                  host=config.config['POSTGRE']['host'],
                                  port=config.config['POSTGRE']['port'])
-    cursor = connection.cursor()
+        cursor = connection.cursor()
 
-def postgre_code(record, flagged):
-    try:
-        # Подключиться к существующей базе данных
-        #connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
-                                      # пароль, который указали при установке PostgreSQL
-        #                              password=config.config['POSTGRE']['password'],
-        #                              host=config.config['POSTGRE']['host'],
-        #                              port=config.config['POSTGRE']['port'],
-        #                              database=config.config['POSTGRE']['database'])
-
-        #cursor = connection.cursor()
-
-        if not flagged:
-            record_to_insert = record
-            print(record_to_insert)
-
-            postgres_insert_query = """ INSERT INTO lpwan.mquery(topic, payload)
-                                           VALUES (%s,%s)"""
-
-            cursor.execute(postgres_insert_query, record_to_insert)
-
-            connection.commit()
-            count = cursor.rowcount  #сделать отдельным методом в классе проверку
-
-            print(count, "Запись успешно добавлена в таблицy mquery")
-            logger_file.logging.info('Запись успешно добавлена в таблицy')
-
-        if flagged == 'ArchiveNumber2':
-            record_to_insert = record
-            print(record_to_insert)
-            postgres_insert_query = """ INSERT INTO lpwan.devdaily(modem_id, act, act1, act2, react, act_minus, react_minus, devtime, devdata)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-
-            cursor.execute(postgres_insert_query, record_to_insert)
-            connection.commit()
-            count = cursor.rowcount
-            print(count, "Запись успешно добавлена в таблицy dev_daily")
-            logger_file.logging.info('Запись успешно добавлена в таблицy dev_daily')
-
-        if flagged == 'Events':
-            record_to_insert = record
-            print(record_to_insert)
-
-            postgres_insert_query = """ INSERT INTO lpwan.events(modem_id, ev_time, ev_code, ev_type, journal)
-                                                       VALUES (%s,%s,%s,%s,%s)"""
-
-            cursor.execute(postgres_insert_query, record_to_insert)
-            connection.commit()
-            count = cursor.rowcount
-            print(count, "Запись успешно добавлена в таблицy events")
-            logger_file.logging.info('Запись успешно добавлена в таблицy events')
-
-    except (Exception, Error) as error:
-        print("Ошибка при работе с PostgreSQL", error)
-        logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)
-        status = connection.status
-        if status != 1:
-            time.sleep(5)
-            reconnect()
-            postgre_code(record, flagged)
-        else:
-            time.sleep(5)
-            reconnect()
-            postgre_code(record, flagged)
+    except:
+        reconnect()
 
 
-
-
-connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
+try:
+    connection = psycopg2.connect(user=config.config['POSTGRE']['user'],
                                   # пароль, который указали при установке PostgreSQL
                                   password=config.config['POSTGRE']['password'],
                                   host=config.config['POSTGRE']['host'],
                                   port=config.config['POSTGRE']['port'],
                                   database=config.config['POSTGRE']['database'])
-cursor = connection.cursor()               #необходима проверка на наличие соединения
-if cursor:
-    print('Connecting to PostgreSQL...')
-if connection:
-    print('Connected to DB.')
-    print('Connection status:', connection.status)
+    cursor = connection.cursor()               #необходима проверка на наличие соединения
+    if cursor:
+         print('Connecting to PostgreSQL...')
+    if connection:
+         print('Connected to DB.')
+         print('Connection status:', connection.status)
+except:
+    reconnect()

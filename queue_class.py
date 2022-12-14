@@ -1,10 +1,6 @@
 import archive_filter
 import filter
-import postgre
-#import postgre_class
 from postgre_class import db
-
-#postgre_object = postgre_class.Postgre_To()
 
 class Queue_1():
     def __init__(self):
