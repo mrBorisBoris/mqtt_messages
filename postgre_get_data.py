@@ -11,11 +11,16 @@ from postgre import connection
 from postgre import cursor
 import logger_file
 from postgre_class import db
+import paho.mqtt.client as mqtt
+
 
 
 data = []
 queue_to_mqtt = queue_class.Queue_1()
 data_to_check = []
+
+
+
 
 
 def create_query_to_mqtt(data):
@@ -27,6 +32,9 @@ def create_query_to_mqtt(data):
             data_payload = json.dumps(i_data[2])
             print(i_data[1], data_payload)
             queue_to_mqtt.push((i_data[1], data_payload))
+
+
+
 
 
         else:

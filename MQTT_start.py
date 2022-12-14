@@ -1,5 +1,7 @@
 import time
 import paho.mqtt.client as mqtt
+
+
 import logger_file
 import config
 import sys
@@ -68,6 +70,8 @@ class MQTT():
                     print('data exists')
                 # ret = client.publish(topic, payload)
                 push_from_postgre()
+            time.sleep(5)
+            push_from_postgre()
 
         def push_from_mqtt_to_postgre():
             if queue_to_global.is_not_empty():
@@ -109,3 +113,5 @@ class MQTT():
 
 
 queue_to_global = queue_class.Queue_1()
+
+

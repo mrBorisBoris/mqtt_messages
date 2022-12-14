@@ -5,6 +5,7 @@ import postgre_get_data
 from postgre_class import db
 
 
+
 def start_one():
     MQTT_starter = MQTT_start.MQTT(client=mqtt.Client(client_id="client1",
                                                       clean_session=True,
