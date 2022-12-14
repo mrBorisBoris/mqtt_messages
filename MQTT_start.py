@@ -71,14 +71,15 @@ class MQTT():
                 # ret = client.publish(topic, payload)
                 push_from_postgre()
             time.sleep(5)
-            push_from_postgre()
+            push_from_mqtt_to_postgre()
 
         def push_from_mqtt_to_postgre():
             if queue_to_global.is_not_empty():
                 queue_to_global.data_filter()
 
             time.sleep(5)
-            push_from_mqtt_to_postgre()
+            push_from_postgre()
+
 
 
 
@@ -107,8 +108,12 @@ class MQTT():
         else:
             print('no data')
         queue = queue_class.Queue_1()
+        push_from_mqtt_to_postgre()
         push_from_postgre()
-        push_from_mqtt_to_postgre() # Вызываем функцию на фильтрацию очереди и отправку данных
+
+
+        #push_from_mqtt_to_postgre()
+        #push_from_postgre()# Вызываем функцию на фильтрацию очереди и отправку данных
         client.loop_stop()
 
 

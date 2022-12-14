@@ -17,7 +17,7 @@ def start_one():
 db.check_connection()
 
 
-thread_1 = threading.Timer(15, start_one)
+thread_1 = threading.Timer(1, start_one)
 thread_1.start()
 
 thread_2 = threading.Thread(target=postgre_get_data.connect_now(), args=())
