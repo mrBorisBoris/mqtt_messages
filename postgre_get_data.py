@@ -4,14 +4,13 @@ import queue_class
 import logger_file
 import time
 import json
-import threading
+
 import queue_class
-import MQTT_start
 from postgre import connection
 from postgre import cursor
 import logger_file
 from postgre_class import db
-import paho.mqtt.client as mqtt
+
 
 
 
