@@ -10,6 +10,8 @@ import MQTT_start
 from postgre import connection
 from postgre import cursor
 import logger_file
+from postgre_class import db
+
 
 data = []
 queue_to_mqtt = queue_class.Queue_1()
@@ -26,6 +28,7 @@ def create_query_to_mqtt(data):
             print(i_data[1], data_payload)
             queue_to_mqtt.push((i_data[1], data_payload))
 
+
         else:
             logger_file.logging.info('no new data found while check')
             continue
@@ -33,6 +36,7 @@ def create_query_to_mqtt(data):
 def connect_now():
     a = int(input('Update data 1/0?'))
     if a == 1:
+
         try:
             postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
             cursor.execute(postgreSQL_select_Query)

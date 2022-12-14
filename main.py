@@ -15,6 +15,7 @@ def start_one():
 
 db.check_connection()
 
+
 thread_1 = threading.Timer(15, start_one)
 thread_1.start()
 

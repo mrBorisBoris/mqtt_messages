@@ -79,6 +79,16 @@ class Postgre_To():
             time.sleep(5)
             reconnect()
 
+    #def read_from(self):
+    #    try:
+    #        postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
+    #        self.cursor.execute(postgreSQL_select_Query)
+    #        print("Selecting rows from tomqtt table using cursor.fetchall")
+    #        all_messages = self.cursor.fetchall()
+    #        print(all_messages)
+    #    except:
+    #        pass
+
 
 
 db = Postgre_To()

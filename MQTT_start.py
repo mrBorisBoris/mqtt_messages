@@ -27,6 +27,7 @@ class MQTT():
                                   transport="tcp")
 
 
+
     def MQTT_start(self):
         """Запуск клиента"""
 
@@ -63,7 +64,6 @@ class MQTT():
                     data_list.append(data_typle)
                     print('new data')
                     ret = client.publish(topic, payload)
-                    print(ret)
                 if data_typle in data_list:
                     print('data exists')
                 # ret = client.publish(topic, payload)
@@ -93,14 +93,15 @@ class MQTT():
         print("Connecting...")
         connection()
         client.connect(config.config['MQTT']['host'], int(config.config['MQTT']['port']))
+
+
+        client.loop_start()
         queue_to_push = postgre_get_data.queue_to_mqtt
         data_list = []
         if queue_to_push.is_not_empty():
             print('data here')
         else:
             print('no data')
-
-        client.loop_start()
         queue = queue_class.Queue_1()
         push_from_postgre()
         push_from_mqtt_to_postgre() # Вызываем функцию на фильтрацию очереди и отправку данных
@@ -108,5 +109,3 @@ class MQTT():
 
 
 queue_to_global = queue_class.Queue_1()
-
-
