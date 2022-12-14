@@ -92,7 +92,7 @@ class MQTT():
                                password='aineekeechohdoo7haecah3r')
         print("Connecting...")
         connection()
-        client.connect('93.188.43.181', 8883)
+        client.connect(config.config['MQTT']['host'], int(config.config['MQTT']['port']))
         queue_to_push = postgre_get_data.queue_to_mqtt
         data_list = []
         if queue_to_push.is_not_empty():

@@ -1,7 +1,10 @@
 import archive_filter
 import filter
 import postgre
+#import postgre_class
+from postgre_class import db
 
+#postgre_object = postgre_class.Postgre_To()
 
 class Queue_1():
     def __init__(self):
@@ -28,15 +31,18 @@ class Queue_1():
             if filtered_data_archive is not None:
                 print(filtered_data_archive)
                 flag = 'ArchiveNumber2'
-                postgre.postgre_code(filtered_data_archive, flag)
+                db.insert_into(filtered_data_archive, flag)
+
         if 'Events' in topic:
             filtered_data = filter.data_filter(payload)
             flag = 'Events'
-            postgre.postgre_code(filtered_data, flag)
+
+            db.insert_into(filtered_data, flag)
         else:
             record_to_insert = (str(topic), str(payload))
             flag = False
-            postgre.postgre_code(record_to_insert, flag)
+            db.insert_into(record_to_insert, flag)
+
 
 
 

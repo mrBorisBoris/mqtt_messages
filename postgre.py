@@ -5,6 +5,7 @@ import logger_file
 import time
 
 
+
 def reconnect():
     connection = psycopg2.connect(database=config.config['POSTGRE']['database'],
                               user=config.config['POSTGRE']['user'],

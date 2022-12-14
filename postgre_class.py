@@ -83,5 +83,6 @@ class Postgre_To():
 
 db = Postgre_To()
 db.insert_into((str('Incotex/TEST'), str(json.dumps('{CommandParams: 123}'))), False)
+
 db.check_connection()
 
