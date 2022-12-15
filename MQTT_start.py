@@ -1,7 +1,6 @@
 import time
 import paho.mqtt.client as mqtt
-
-
+import read_filter
 import logger_file
 import config
 import sys
@@ -49,6 +48,7 @@ class MQTT():
         def on_message(client, userdata, msg):
             checked = modem_id_filter.filter_modems(msg.topic)
             if checked:
+                read_filter.filter_topic(msg.topic, msg.payload)
                 queue_to_global.push([msg.topic, msg.payload])
             else:
                 pass
