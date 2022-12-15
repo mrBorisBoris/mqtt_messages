@@ -108,13 +108,11 @@ class MQTT():
             print('data here')
         else:
             print('no data')
+
         queue = queue_class.Queue_1()
         push_from_mqtt_to_postgre()
         push_from_postgre()
 
-
-        #push_from_mqtt_to_postgre()
-        #push_from_postgre()# Вызываем функцию на фильтрацию очереди и отправку данных
         client.loop_stop()
 
 
