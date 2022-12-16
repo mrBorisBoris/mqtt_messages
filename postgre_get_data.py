@@ -44,8 +44,8 @@ def connect_now():
     if a == 1:
 
         try:
-            postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
-            #postgreSQL_select_Query = "SELECT topic, payload from lpwan.mqtt_getqueue()"
+            #postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
+            postgreSQL_select_Query = "SELECT topic, payload from lpwan.mqtt_getqueue()"
             cursor.execute(postgreSQL_select_Query)
             print("Selecting rows from tomqtt table using cursor.fetchall")
             all_messages = cursor.fetchall()
@@ -68,17 +68,17 @@ def connect_now():
 
 
 def setsend(topic, payload):
-    #try:
-    print(type(topic))
+    # try:
     payload_str = str(payload, 'UTF-8')
-    print(type(payload_str))
     query = "SELECT lpwan.mqtt_setsend('"+ topic +"','"+payload_str+"')"
-    #print(query)
-    #postgreSQL_select_Query = "SELECT lpwan.mqtt_setsend(%s, %s)", str(topic), payload
     cursor.execute(query)
-    message = cursor.fetchall()
-    print(message)
-    #except:
-        #print('error')
+    print('setsend ok')
+
+
+def setanswer(topic, payload):
+    payload_to = str(payload, 'UTF-8')
+    query = "SELECT lpwan.mqtt_setanswer('"+ topic +"','"+payload_to+"')"
+    cursor.execute(query)
+    print('setanswer ok')
 
 
