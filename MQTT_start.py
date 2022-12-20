@@ -42,7 +42,7 @@ class MQTT():
                 connection()
 
         def on_connect(client, userdata, flags, rc):
-            print("Connected with result code", rc)
+            #print("Connected with result code", rc)
             client.subscribe("Incotex/#")
 
         def on_message(client, userdata, msg):
