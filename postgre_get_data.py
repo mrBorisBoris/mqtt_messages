@@ -44,8 +44,8 @@ def connect_now():
     if a == 1:
 
         try:
-            postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
-            #postgreSQL_select_Query = "SELECT topic, payload from lpwan.mqtt_getqueue()"
+            #postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
+            postgreSQL_select_Query = "SELECT topic, payload from lpwan.mqtt_getqueue()"
             cursor.execute(postgreSQL_select_Query)
             print("Selecting rows from tomqtt table using cursor.fetchall")
             all_messages = cursor.fetchall()
