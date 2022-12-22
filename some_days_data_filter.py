@@ -8,6 +8,8 @@ queue_to_insert = queue.Queue()
 def many_days(topic, payload):
     topic_data = topic
     all_data = payload
+    first_string_topic = str(topic)
+    first_string_payload = str(payload)
     queue_to_insert.put((topic_data, all_data))
     archive = json.loads(all_data)
 
@@ -62,8 +64,9 @@ def many_days(topic, payload):
 
     data_to_insert = queue_to_insert.queue
     data_to_insert = tuple(data_to_insert)
+    data_to_insert = str(data_to_insert)
+    data_to_insert = data_to_insert[1:-1]
     print(data_to_insert)
-    print(len(data_to_insert))
-    for index in range(len(data_to_insert)):
-        print(data_to_insert[index])
+    return first_string_topic, first_string_payload, data_to_insert
+
 

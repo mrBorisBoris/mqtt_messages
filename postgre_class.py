@@ -73,6 +73,22 @@ class Postgre_To():
                 print(count, "Запись успешно добавлена в таблицy events")
                 logger_file.logging.info('Запись успешно добавлена в таблицy events')
 
+            if flagged == 'Answer/Archive':
+                data = record
+                first_string_topic = data[0]
+                first_string_payload = data[1]
+                data_to_insert = data[2]
+                postgres_insert_query = "with jst as ( INSERT INTO lpwan.devdaily_json(devdata) VALUES ('"+first_string_topic+"','"+ first_string_payload+") returning id )," \
+                                                                                 "arc as " \
+                                                                                 "(INSERT INTO lpwan.devdaily( modem_id, act, act1, act2, react, act_minus, react_minus, devtime,  devdata_id)" \
+                                                                                 "VALUES '" + data_to_insert + "'RETURNING id,devdata_id)" \
+                                                                                 "select a.id, j.id from arc a inner join jst j on j.id=a.devdata_id"
+                self.cursor.execute(postgres_insert_query)
+                count = self.cursor.rowcount
+                print(count, "Запись успешно добавлена в таблицy devdaily_json")
+                logger_file.logging.info('Множественная вставка выполнена')
+
+
         except (Exception, Error) as error:
             print("Ошибка при работе с PostgreSQL", error)
             logger_file.logging.error("Ошибка при работе с PostgreSQL", error, exc_info=True)

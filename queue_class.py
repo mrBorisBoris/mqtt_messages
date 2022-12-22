@@ -38,7 +38,11 @@ class Queue_1():
             db.insert_into(filtered_data, flag)
 
         if 'Answer/Archive' in topic:
-            some_days_data_filter.many_days(topic, payload)
+            data = some_days_data_filter.many_days(topic, payload)
+            flag = 'Answer/Archive'
+            db.insert_into(data, flag)
+
+
 
         else:
             record_to_insert = (str(topic), str(payload))
