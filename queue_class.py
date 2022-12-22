@@ -1,6 +1,8 @@
 import archive_filter
 import filter
 from postgre_class import db
+import some_days_data_filter
+
 
 class Queue_1():
     def __init__(self):
@@ -34,6 +36,10 @@ class Queue_1():
             flag = 'Events'
 
             db.insert_into(filtered_data, flag)
+
+        if 'Answer/Archive' in topic:
+            some_days_data_filter.many_days(topic, payload)
+
         else:
             record_to_insert = (str(topic), str(payload))
             flag = False
