@@ -10,12 +10,13 @@ def many_days(topic, payload):
     all_data = payload
     first_string_topic = str(topic)
     first_string_payload = str(payload)
-    queue_to_insert.put((topic_data, all_data))
+
     archive = json.loads(all_data)
 
     values = archive["archiveValues"]
-    print(len(values))
-    modem_id = archive["completeParams"]["MeterParams"]["SerialNumber"]
+    print(values)
+
+    modem_id = int(archive["completeParams"]["MeterParams"]["SerialNumber"])
     data_values = []
     for i_data in values:
         # print(i_data)
@@ -56,17 +57,26 @@ def many_days(topic, payload):
         print('DEVTIME = ', datetime_time)
         original_data = archive
         print('DEVDATA = ', archive)
-        all_data = (modem_id, act, act_1, act_2, react, act_minus, react_minus, datetime_time, original_data)
+        a2 = ',  (select id from jst)),'
+        all_data = (modem_id, act, act_1, act_2, react, act_minus, react_minus, dev_time)
+        all_data = str(all_data)
+        all_data = all_data[:-1]
+        all_data += '::timestamp'
+        all_data += a2
+        print(all_data)
         print('ALL PARSED DATA = ', all_data)
         queue_to_insert.put(all_data)
 
-
-
-    data_to_insert = queue_to_insert.queue
-    data_to_insert = tuple(data_to_insert)
-    data_to_insert = str(data_to_insert)
-    data_to_insert = data_to_insert[1:-1]
-    print(data_to_insert)
-    return first_string_topic, first_string_payload, data_to_insert
+    data = queue_to_insert.queue
+    print(len(data))
+    data_beta = ''
+    for i in range(len(data)):
+        data_beta += data[i]
+    print('DATA BETA = ', data_beta)
+    data_beta = data_beta[:-1]
+    print('DATA BETA = ', data_beta)
+    data_beta = data_beta.replace("[", "'{")
+    data_beta = data_beta.replace("]", "}'")
+    return first_string_topic, first_string_payload, data_beta
 
 
