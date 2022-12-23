@@ -25,27 +25,34 @@ def create_query_to_mqtt(data):
     global queue_to_mqtt
     max_id = 0
     for i_data in data:
-        if i_data[0] > max_id:
-            max_id = i_data[0]
-            data_payload = json.dumps(i_data[2])
-            print(i_data[1], data_payload)
-            queue_to_mqtt.push((i_data[1], data_payload))
+        #if i_data[0] > max_id:
+            #max_id = i_data[0]
+        data_payload = json.dumps(i_data[1])
+        print(i_data[0], data_payload)
+        queue_to_mqtt.push((i_data[0], data_payload))
 
 
 
 
 
-        else:
-            logger_file.logging.info('no new data found while check')
-            continue
+        #else:
+        #    logger_file.logging.info('no new data found while check')
+        #    continue
 
 def connect_now():
     a = int(input('Update data 1/0?'))
     if a == 1:
 
         try:
-            postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
-            #postgreSQL_select_Query = "SELECT topic, payload from lpwan.mqtt_getqueue()"
+            #postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
+            #postgreSQL_select_Query = "with lst as (select min(timestmp) as timestmp, modem_id FROM lpwan.tomqtt " \
+            #                          "where complete is null and CURRENT_TIMESTAMP-timestmp < interval '1 hours'" \
+            #                          "group by modem_id)" \
+            #                          "SELECT  topic, payload " \
+            #                          "FROM lst" \
+            #                          "join lpwan.tomqtt m on m.modem_id=lst.modem_id and m.timestmp=lst.timestmp" \
+            #                          "where sended is null"
+            postgreSQL_select_Query = "SELECT topic, payload FROM lpwan.mqtt_que"
             cursor.execute(postgreSQL_select_Query)
             print("Selecting rows from tomqtt table using cursor.fetchall")
             all_messages = cursor.fetchall()
@@ -71,13 +78,16 @@ def setsend(topic, payload):
     # try:
     payload_str = str(payload, 'UTF-8')
     query = "SELECT lpwan.mqtt_setsend('"+ topic +"','"+payload_str+"')"
+    print(query)
     cursor.execute(query)
     print('setsend ok')
 
 
 def setanswer(topic, payload):
     payload_to = str(payload, 'UTF-8')
+
     query = "SELECT lpwan.mqtt_setanswer('"+ topic +"','"+payload_to+"')"
+    print(query)
     cursor.execute(query)
     print('setanswer ok')
 

@@ -76,8 +76,6 @@ class Postgre_To():
             if flagged == 'Answer/Archive':
                 data = record
                 first_string_topic = data[0]
-                #first_string_payload = json.loads(data[1])
-                #first_string_payload = json.dumps(data[1])
                 first_string_payload = data[1]
                 data_to_insert = data[2]
                 print(data_to_insert)
