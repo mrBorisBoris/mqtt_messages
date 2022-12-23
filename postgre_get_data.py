@@ -56,6 +56,7 @@ def connect_now():
             cursor.execute(postgreSQL_select_Query)
             print("Selecting rows from tomqtt table using cursor.fetchall")
             all_messages = cursor.fetchall()
+            connection.commit()
             global data
             create_query_to_mqtt(data)
             data = all_messages
