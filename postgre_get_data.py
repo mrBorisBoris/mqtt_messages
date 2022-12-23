@@ -80,6 +80,7 @@ def setsend(topic, payload):
     query = "SELECT lpwan.mqtt_setsend('"+ topic +"','"+payload_str+"')"
     print(query)
     cursor.execute(query)
+    connection.commit()
     print('setsend ok')
 
 
@@ -89,6 +90,7 @@ def setanswer(topic, payload):
     query = "SELECT lpwan.mqtt_setanswer('"+ topic +"','"+payload_to+"')"
     print(query)
     cursor.execute(query)
+    connection.commit()
     print('setanswer ok')
 
 
