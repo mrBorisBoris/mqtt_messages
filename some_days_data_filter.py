@@ -72,7 +72,7 @@ def many_days(topic, payload):
         print(len(data))
         data_beta = ''
         for i in range(len(data)):
-             data_beta += data[i]
+            data_beta += data[i]
         print('DATA BETA = ', data_beta)
         data_beta = data_beta[:-1]
         print('DATA BETA = ', data_beta)
