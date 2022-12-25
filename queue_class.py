@@ -40,7 +40,8 @@ class Queue_1():
         if 'Answer/Archive' in topic:
             data = some_days_data_filter.many_days(topic, payload)
             flag = 'Answer/Archive'
-            db.insert_into(data, flag)
+            if data is not None:
+                db.insert_into(data, flag)
 
 
 

@@ -78,13 +78,15 @@ def many_days(topic, payload):
             print('DATA BETA = ', data_beta)
             data_beta = data_beta.replace("[", "'{")
             data_beta = data_beta.replace("]", "}'")
-            return first_string_topic, first_string_payload, data_beta
+            return first_string_topic, first_string_payload, data_beta, 'Answer/Archive'
         else:
             logger_file.logging.info('CommandID:', command_id, exc_info=True)
+            return None
 
     except TypeError:
         logger_file.logging.error('TypeError', exc_info=True)
-        pass
+        return None
+
 
 
 

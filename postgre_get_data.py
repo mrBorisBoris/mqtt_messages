@@ -81,9 +81,12 @@ def setsend(topic, payload):
     payload_str = str(payload, 'UTF-8')
     query = "SELECT lpwan.mqtt_setsend('"+ topic +"','"+payload_str+"')"
     print(query)
-    cursor.execute(query)
-    connection.commit()
-    print('setsend ok')
+    try:
+        cursor.execute(query)
+        connection.commit()
+        print('setsend ok')
+    except:
+        pass
 
 
 def setanswer(topic, payload):
