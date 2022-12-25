@@ -62,13 +62,7 @@ class MQTT():
                 topic = str(data_from[0])
                 payload = data_from[1]
                 data_typle = (topic, payload)
-                if data_typle not in data_list:
-                    data_list.append(data_typle)
-                    print('new data')
-                    ret = client.publish(topic, payload)
-                if data_typle in data_list:
-                    print('data exists')
-                    logger_file.logging.info('No new data to publish', exc_info=True)
+                ret = client.publish(topic, payload)
                 # ret = client.publish(topic, payload)
                 push_from_postgre()
             time.sleep(5)

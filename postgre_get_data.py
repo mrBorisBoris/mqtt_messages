@@ -40,7 +40,8 @@ def create_query_to_mqtt(data):
         #    continue
 
 def connect_now():
-    a = int(input('Update data 1/0?'))
+    #a = int(input('Update data 1/0?'))
+    a = 1
     if a == 1:
 
         try:
@@ -61,7 +62,7 @@ def connect_now():
             create_query_to_mqtt(data)
             data = all_messages
             print(data)
-            time.sleep(5)
+            time.sleep(15)
             connect_now()
 
 

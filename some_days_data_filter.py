@@ -79,6 +79,8 @@ def many_days(topic, payload):
             data_beta = data_beta.replace("[", "'{")
             data_beta = data_beta.replace("]", "}'")
             return first_string_topic, first_string_payload, data_beta
+        else:
+            logger_file.logging.info('CommandID:', command_id, exc_info=True)
 
     except TypeError:
         logger_file.logging.error('TypeError', exc_info=True)
