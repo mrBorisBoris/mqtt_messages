@@ -25,7 +25,6 @@ def many_days(topic, payload):
 
             data_values = []
             for i_data in values:
-        # print(i_data)
                 data_values.append(i_data)
 
             date_dict = {}
@@ -33,14 +32,11 @@ def many_days(topic, payload):
                 if i_date['Time'] not in date_dict:
                     date_dict[i_date['Time']] = {}
 
-# print(date_dict)
-
 
             for value in data_values:
                 if value['Time'] in date_dict:
                     date_dict[value['Time']][value['ValueType']] = value
 
-# print(date_dict)
 
             for i_key, i_value in date_dict.items():
                 print(i_key)
