@@ -31,6 +31,7 @@ class Postgre_To():
         print(db.connection)
         print(db.cursor)
         print(db.connection.status)
+
     def insert_into(self, record, flagged):
         try:
             if not flagged:
@@ -86,6 +87,7 @@ class Postgre_To():
                                                                                  "select a.id, j.id from arc a inner join jst j on j.id=a.devdata_id"
                 print(postgres_insert_query)
                 self.cursor.execute(postgres_insert_query)
+                self.connection.commit()
                 count = self.cursor.rowcount
                 print(count, "Запись успешно добавлена в таблицy devdaily_json")
                 logger_file.logging.info('Множественная вставка выполнена')
@@ -97,15 +99,6 @@ class Postgre_To():
             time.sleep(5)
             reconnect()
 
-    #def read_from(self):
-    #    try:
-    #        postgreSQL_select_Query = "SELECT id, topic, payload FROM lpwan.tomqtt;"
-    #        self.cursor.execute(postgreSQL_select_Query)
-    #        print("Selecting rows from tomqtt table using cursor.fetchall")
-    #        all_messages = self.cursor.fetchall()
-    #        print(all_messages)
-    #    except:
-    #        pass
 
 
 
