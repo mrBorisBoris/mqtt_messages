@@ -42,6 +42,8 @@ class Queue_1():
             flag = 'Answer/Archive'
             if data is not None:
                 db.insert_into(data, flag)
+            else:
+                pass
 
 
 

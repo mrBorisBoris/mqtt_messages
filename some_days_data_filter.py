@@ -39,26 +39,15 @@ def many_days(topic, payload):
 
 
             for i_key, i_value in date_dict.items():
-                print(i_key)
-                print(i_value)
-                print('MODEM_ID = ', modem_id)
-                print('ACT = ', i_value[1]['Values'])
                 act = i_value[1]['Values']
-                print('ACT1 = ', i_value[1]['Values'][1])
                 act_1 = i_value[1]['Values'][1]
-                print('ACT2 = ', i_value[1]['Values'][2])
                 act_2 = i_value[1]['Values'][2]
-                print('REACT = ', i_value[2]['Values'])
                 react = i_value[2]['Values']
-                print('ACT_MINUS = ', i_value[25]['Values'])
                 act_minus = i_value[25]['Values']
-                print('REACT_MINUS =', i_value[26]['Values'])
                 react_minus = i_value[26]['Values']
                 dev_time = i_value[1]['Time']
                 datetime_time = datetime.datetime.strptime(dev_time, '%Y-%m-%dT%H:%M:%S')
-                print('DEVTIME = ', datetime_time)
                 original_data = archive
-                print('DEVDATA = ', archive)
                 a2 = ',  (select id from jst)),'
                 all_data = (modem_id, act, act_1, act_2, react, act_minus, react_minus, dev_time)
                 all_data = str(all_data)
@@ -69,18 +58,19 @@ def many_days(topic, payload):
                 queue_to_insert.put(all_data)
 
             data = queue_to_insert.queue
-            print(len(data))
+
             data_beta = ''
             for i in range(len(data)):
                 data_beta += data[i]
-            print('DATA BETA = ', data_beta)
+            logger_file.logging.info('ArchiveValuesData: ', data_beta)
             data_beta = data_beta[:-1]
-            print('DATA BETA = ', data_beta)
+
             data_beta = data_beta.replace("[", "'{")
             data_beta = data_beta.replace("]", "}'")
+            print('DATA BETA = ', data_beta)
             return first_string_topic, first_string_payload, data_beta, 'Answer/Archive'
         else:
-            logger_file.logging.info('CommandID:', command_id, exc_info=True)
+            #logger_file.logging.info('CommandID:', str(command_id), exc_info=True)
             return None
 
     except TypeError:

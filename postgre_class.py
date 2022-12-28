@@ -81,20 +81,19 @@ class Postgre_To():
                 print(first_string_topic)
                 first_string_payload = data[1]
                 data_to_insert = data[2]
-                if first_string_topic is not None:
 
-                    print(data_to_insert)
-                    postgres_insert_query = "with jst as ( INSERT INTO lpwan.devdaily_json(devdata) VALUES ('"+ first_string_payload +"') returning id )," \
+                print(data_to_insert)
+                postgres_insert_query = "with jst as ( INSERT INTO lpwan.devdaily_json(devdata) VALUES ('"+ first_string_payload +"') returning id )," \
                                                                                  "arc as " \
                                                                                  "(INSERT INTO lpwan.devdaily( modem_id, act, act1, act2, react, act_minus, react_minus, devtime,  devdata_id)" \
                                                                                  "VALUES " + data_to_insert + "RETURNING id,devdata_id)" \
                                                                                  "select a.id, j.id from arc a inner join jst j on j.id=a.devdata_id"
-                    print(postgres_insert_query)
-                    self.cursor.execute(postgres_insert_query)
-                    self.connection.commit()
-                    count = self.cursor.rowcount
-                    print(count, "Запись успешно добавлена в таблицy devdaily_json")
-                    logger_file.logging.info('Множественная вставка выполнена')
+                print(postgres_insert_query)
+                self.cursor.execute(postgres_insert_query)
+                self.connection.commit()
+                count = self.cursor.rowcount
+                print(count, "Запись успешно добавлена в таблицy devdaily_json")
+                logger_file.logging.info('Множественная вставка выполнена')
 
                 #except:
                     #pass

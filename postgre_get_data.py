@@ -23,25 +23,14 @@ data_to_check = []
 
 def create_query_to_mqtt(data):
     global queue_to_mqtt
-    max_id = 0
     for i_data in data:
-        #if i_data[0] > max_id:
-            #max_id = i_data[0]
         data_payload = json.dumps(i_data[1])
         print(i_data[0], data_payload)
         queue_to_mqtt.push((i_data[0], data_payload))
 
 
-
-
-
-        #else:
-        #    logger_file.logging.info('no new data found while check')
-        #    continue
-
 def connect_now():
-    #a = int(input('Update data 1/0?'))
-    a = 1
+    a = int(input('Update data 1/0?'))
     if a == 1:
 
         try:
@@ -77,7 +66,6 @@ def connect_now():
 
 
 def setsend(topic, payload):
-    # try:
     payload_str = str(payload, 'UTF-8')
     query = "SELECT lpwan.mqtt_setsend('"+ topic +"','"+payload_str+"')"
     print(query)
@@ -92,7 +80,7 @@ def setsend(topic, payload):
 def setanswer(topic, payload):
     payload_to = str(payload, 'UTF-8')
 
-    query = "SELECT lpwan.mqtt_setanswer('"+ topic +"','"+payload_to+"')"
+    query = "SELECT lpwan.mqtt_setanswer('" + topic + "','" + payload_to + "')"
     print(query)
     cursor.execute(query)
     connection.commit()
