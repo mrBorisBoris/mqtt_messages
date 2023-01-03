@@ -30,7 +30,7 @@ def create_query_to_mqtt(data):
 
 
 def connect_now():
-    a = int(input('Update data 1/0?'))
+    a = 1
     if a == 1:
 
         try:
@@ -67,7 +67,7 @@ def connect_now():
 
 def setsend(topic, payload):
     payload_str = str(payload, 'UTF-8')
-    query = "SELECT lpwan.mqtt_setsend('"+ topic +"','"+payload_str+"')"
+    query = "SELECT lpwan.mqtt_setsend('" + topic + "','" + payload_str + "')"
     print(query)
     try:
         cursor.execute(query)
